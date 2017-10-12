@@ -1,5 +1,5 @@
 {
-    "name": "IBM WebSphere Network Deployment 8.5.5 on a single VM - VMware vSphere",
+    "name": "IBM WebSphere Network Deployment V8.5.5 on a single virtual machine - VMware vSphere",
     "description": "This template deploys a standalone instance of WebSphere Application Server Network Deployment 8.5.5 on a Linux virtual machine.",
     "version": "1.0",
     "imageUrl": "",
@@ -23,7 +23,7 @@
       }
     },
     "metadata": {
-      "displayName": "IBM WebSphere Network Deployment 8.5.5 on a single VM",
+      "displayName": "IBM WebSphere Network Deployment V8.5.5 on a single virtual machine",
       "providerDisplayName": "VMware vSphere",
       "longDescription": "This template deploys a standalone instance of WebSphere Application Server Network Deployment 8.5.5 on a Linux virtual machine.",
       "bullets": [{
@@ -37,10 +37,10 @@
     "description": "Red Hat Enterprise Linux 7<br>Red Hat Enterprise Linux 6<br>Ubuntu 16.04 LTS<br>Ubuntu 14.04 LTS<br>"},
 {
     "title": "Topology",
-    "description": "1 virtual machine:<br>  IBM WebSphere Application Server Network Deployment 8.5.5 - standalone server<br>"},
+    "description": "1 virtual machine:<br>  IBM WebSphere Application Server Network Deployment V8.5.5 - standalone server<br>"},
 {
     "title": "Software Deployed",
-    "description": "IBM WebSphere Application Server Network Deployment 8.5.5<br>IBM SDK, Java Technology Edition 8<br>"},
+    "description": "IBM WebSphere Application Server Network Deployment V8.5.5<br>IBM SDK, Java Technology Edition 8<br>"},
 {
     "title": "Default Virtual Machine Settings",
     "description": " vCPU 1, Memory (GB) 2<br>"},

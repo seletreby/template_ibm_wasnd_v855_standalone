@@ -115,6 +115,17 @@
       "group_name": "virtualmachine"
     },
     {
+      "name": "WASNode01_domain",
+      "type": "string",
+      "description": "Domain Name of virtual machine",
+      "hidden": false,
+      "label": "Domain Name - WASNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
       "name": "ibm_pm_access_token",
       "type": "string",
       "description": "IBM Pattern Manager Access Token",
@@ -337,7 +348,8 @@
       "options": [
         {
           "value": "eager_zeroed",
-          "label": "Thick Provision Eager Zeroed"
+          "label": "Thick Provision Eager Zeroed",
+          "default": "true"
         },
         {
           "value": "lazy",
@@ -346,7 +358,6 @@
         {
           "value": "thin",
           "label": "Thin Provision",
-          "default": "true",
           "group_name": "virtualmachine"
         }
       ],
@@ -403,7 +414,7 @@
       "name": "WASNode01_number_of_vcpu",
       "type": "string",
       "description": "Number of virtual CPU for the virtual machine, which is required to be a positive Integer",
-      "default": 1,
+      "default": 2,
       "hidden": false,
       "label": "Virtual Machine vCPUs - WASNode01",
       "secured": false,
@@ -435,54 +446,6 @@
       "group_name": "wasnode01"
     },
     {
-      "name": "WASNode01_was_java_version",
-      "type": "string",
-      "description": "The Java SDK version that should be installed with the WebSphere Application Server. Example format is 8.0.4.70",
-      "default": "7.1.40.5",
-      "hidden": false,
-      "label": "WebSphere Java SDK version - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_install_dir",
-      "type": "string",
-      "description": "The installation root directory for the WebSphere Application Server product binaries",
-      "default": "/opt/IBM/WebSphere/AppServer",
-      "hidden": false,
-      "label": "WebSphere product installation directory - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_os_users_was_name",
-      "type": "string",
-      "description": "Operating system userid that will be used to install the product. Userid will be created if it does not exist",
-      "default": "wasadmin",
-      "hidden": false,
-      "label": "WebSphere installation userid - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_profile_dir",
-      "type": "string",
-      "description": "The directory path that contains WebSphere Application Server profiles",
-      "default": "/opt/IBM/WebSphere/AppServer/profiles",
-      "hidden": false,
-      "label": "WebSphere profile location - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "wasnode01"
-    },
-    {
       "name": "WASNode01_was_profiles_standalone_profiles_standalone1_cell",
       "type": "string",
       "description": "Cell name for the application server",
@@ -495,12 +458,60 @@
       "group_name": "wasnode01"
     },
     {
+      "name": "WASNode01_was_wsadmin_standalone_jvmproperty_property_value_maximum",
+      "type": "string",
+      "description": "Maximum JVM heap size",
+      "default": "512",
+      "hidden": false,
+      "label": "WebSphere Application Server maximum JVM Heap Size - WASNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "wasnode01"
+    },
+    {
+      "name": "WASNode01_was_wsadmin_standalone_jvmproperty_property_value_initial",
+      "type": "string",
+      "description": "Minimum JVM heap size",
+      "default": "256",
+      "hidden": false,
+      "label": "WebSphere Application Server minimum JVM Heap Size - WASNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "wasnode01"
+    },
+    {
+      "name": "WASNode01_was_profiles_standalone_profiles_standalone1_server",
+      "type": "string",
+      "description": "Name of the application server",
+      "default": "standalone01",
+      "hidden": true,
+      "label": "WebSphere Application Server name - WASNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "wasnode01"
+    },
+    {
       "name": "WASNode01_was_profiles_standalone_profiles_standalone1_profile",
       "type": "string",
       "description": "Application server profile name",
       "default": "AppSrv01",
       "hidden": false,
       "label": "WebSphere Application Server profile name - WASNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "wasnode01"
+    },
+    {
+      "name": "WASNode01_was_java_version",
+      "type": "string",
+      "description": "The Java SDK version that should be installed with the WebSphere Application Server. Example format is 8.0.4.70",
+      "default": "7.1.40.5",
+      "hidden": false,
+      "label": "WebSphere Java SDK version - WASNode01",
       "secured": false,
       "required": true,
       "immutable": false,
@@ -541,36 +552,12 @@
       "group_name": "wasnode01"
     },
     {
-      "name": "WASNode01_was_wsadmin_standalone_jvmproperty_property_value_initial",
+      "name": "WASNode01_was_os_users_was_name",
       "type": "string",
-      "description": "Minimum JVM heap size",
-      "default": "256",
+      "description": "Operating system userid that will be used to install the product. Userid will be created if it does not exist",
+      "default": "wasadmin",
       "hidden": false,
-      "label": "WebSphere Application Server minimum JVM Heap Size - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_wsadmin_standalone_jvmproperty_property_value_maximum",
-      "type": "string",
-      "description": "Maximum JVM heap size",
-      "default": "512",
-      "hidden": false,
-      "label": "WebSphere Application Server maximum JVM Heap Size - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_profiles_standalone_profiles_standalone1_server",
-      "type": "string",
-      "description": "Name of the application server",
-      "default": "standalone01",
-      "hidden": true,
-      "label": "WebSphere Application Server name - WASNode01",
+      "label": "WebSphere installation userid - WASNode01",
       "secured": false,
       "required": true,
       "immutable": false,
@@ -583,6 +570,30 @@
       "default": "/home/wasadmin",
       "hidden": true,
       "label": "WebSphere installation userid home directory - WASNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "wasnode01"
+    },
+    {
+      "name": "WASNode01_was_install_dir",
+      "type": "string",
+      "description": "The installation root directory for the WebSphere Application Server product binaries",
+      "default": "/opt/IBM/WebSphere/AppServer",
+      "hidden": false,
+      "label": "WebSphere product installation directory - WASNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "wasnode01"
+    },
+    {
+      "name": "WASNode01_was_profile_dir",
+      "type": "string",
+      "description": "The directory path that contains WebSphere Application Server profiles",
+      "default": "/opt/IBM/WebSphere/AppServer/profiles",
+      "hidden": false,
+      "label": "WebSphere profile location - WASNode01",
       "secured": false,
       "required": true,
       "immutable": false,

@@ -1,4 +1,4 @@
-# Template - IBM WebSphere Network Deployment 8.5.5 on a single VM
+# Template - IBM WebSphere Network Deployment V8.5.5 on a single virtual machine
 Template Version - 1.0
 
 ## Description
@@ -25,11 +25,11 @@ Ubuntu 14.04 LTS<br>
 ### Topology
 
 1 virtual machine:<br>
-  IBM WebSphere Application Server Network Deployment 8.5.5 - standalone server<br>
+  IBM WebSphere Application Server Network Deployment V8.5.5 - standalone server<br>
 <br>
 ### Software Deployed
 
-IBM WebSphere Application Server Network Deployment 8.5.5<br>
+IBM WebSphere Application Server Network Deployment V8.5.5<br>
 IBM SDK, Java Technology Edition 8<br>
 <br>
 ### Default Virtual Machine Settings
