@@ -556,7 +556,7 @@
       "type": "string",
       "description": "Operating system userid that will be used to install the product. Userid will be created if it does not exist",
       "default": "wasadmin",
-      "hidden": false,
+      "hidden": true,
       "label": "WebSphere installation userid - WASNode01",
       "secured": false,
       "required": true,
