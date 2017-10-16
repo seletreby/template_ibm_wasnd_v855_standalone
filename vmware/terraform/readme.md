@@ -1,9 +1,9 @@
-# Template - IBM WebSphere Network Deployment V8.5.5 on a single virtual machine
+# Template - IBM WebSphere Application Server Network Deployment V8.5.5 on a single virtual machine
 Template Version - 1.0
 
 ## Description
 
-This template deploys a standalone instance of WebSphere Application Server Network Deployment 8.5.5 on a Linux virtual machine.<br>
+This template deploys a standalone instance of WebSphere Application Server Network Deployment V8.5.5 on a Linux virtual machine.<br>
 
 ## Features
 
@@ -25,12 +25,12 @@ Ubuntu 14.04 LTS<br>
 ### Topology
 
 1 virtual machine:<br>
-  IBM WebSphere Application Server Network Deployment V8.5.5 - standalone server<br>
+  IBM WebSphere Application Server Network Deployment - standalone server<br>
 <br>
 ### Software Deployed
 
 IBM WebSphere Application Server Network Deployment V8.5.5<br>
-IBM SDK, Java Technology Edition 8<br>
+IBM SDK, Java Technology Edition V8<br>
 <br>
 ### Default Virtual Machine Settings
 
@@ -39,8 +39,8 @@ IBM SDK, Java Technology Edition 8<br>
 ### Usage and Special Notes
 
 1. The user is responsible for obtaining appropriate software licenses and downloads prior to template deployment.<br>
-2. Detailed system requirements for WAS ND 8.5.5 - <a href=\"https://www.ibm.com/software/reports/compatibility/clarity/index.html\" target=\"_blank\">https://www.ibm.com/software/reports/compatibility/clarity/index.html</a><br>
-3. IBM Knowledge Center for WAS ND 8.5.5 - <a href=\"https://www.ibm.com/support/knowledgecenter/en/SSAW57_8.5.5\" target=\"_blank\">https://www.ibm.com/support/knowledgecenter/en/SSAW57_8.5.5</a><br>
+2. Detailed system requirements for WAS ND V8.5.5 - <a href=\"https://www.ibm.com/software/reports/compatibility/clarity/index.html\" target=\"_blank\">https://www.ibm.com/software/reports/compatibility/clarity/index.html</a><br>
+3. IBM Knowledge Center for WAS ND V8.5.5 - <a href=\"https://www.ibm.com/support/knowledgecenter/en/SSAW57_8.5.5\" target=\"_blank\">https://www.ibm.com/support/knowledgecenter/en/SSAW57_8.5.5</a><br>
 4. IBM Support Portal - <a href=\"https://www.ibm.com/support/home/\" target=\"_blank\">https://www.ibm.com/support/home/</a><br>
 <br>
 

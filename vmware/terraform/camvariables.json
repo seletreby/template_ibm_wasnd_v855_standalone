@@ -414,7 +414,7 @@
       "name": "WASNode01_number_of_vcpu",
       "type": "string",
       "description": "Number of virtual CPU for the virtual machine, which is required to be a positive Integer",
-      "default": 2,
+      "default": 1,
       "hidden": false,
       "label": "Virtual Machine vCPUs - WASNode01",
       "secured": false,
