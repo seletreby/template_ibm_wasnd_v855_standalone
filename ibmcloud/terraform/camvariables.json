@@ -26,6 +26,10 @@
     {
       "name": "wasnode01",
       "label": "WASNode01"
+    },
+    {
+      "name": "ungrouped",
+      "label": "ungrouped"
     }
   ],
   "output_groups": [
@@ -45,86 +49,6 @@
       "required": true,
       "immutable": false,
       "group_name": "environment"
-    },
-    {
-      "name": "allow_unverified_ssl",
-      "type": "string",
-      "description": "Communication with vsphere server with self signed certificate",
-      "default": true,
-      "hidden": true,
-      "label": "Communication with vsphere server with self signed certificate",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
-    },
-    {
-      "name": "user_public_ssh_key",
-      "type": "string",
-      "description": "User defined public SSH key used to connect to the virtual machine. The format must be in openSSH.",
-      "default": "None",
-      "hidden": false,
-      "label": "User Public SSH Key - ssh_keys",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "ssh_keys"
-    },
-    {
-      "name": "WASNode01_dns_servers",
-      "type": "list",
-      "description": "DNS servers for the virtual network adapter",
-      "hidden": false,
-      "label": "DNS Servers - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
-      "name": "WASNode01_dns_suffixes",
-      "type": "list",
-      "description": "Name resolution suffixes for the virtual network adapter",
-      "hidden": false,
-      "label": "DNS Suffixes - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
-      "name": "WASNode01_root_disk_keep_on_remove",
-      "type": "string",
-      "description": "Delete template disk volume when the virtual machine is deleted",
-      "default": "false",
-      "hidden": true,
-      "label": "Delete template disk volume when the virtual machine is deleted - WASNode01",
-      "secured": false,
-      "options": [
-        {
-          "value": "false",
-          "label": "False",
-          "default": "true"
-        },
-        {
-          "value": "true",
-          "label": "True"
-        }
-      ],
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
-      "name": "WASNode01_domain",
-      "type": "string",
-      "description": "Domain Name of virtual machine",
-      "hidden": false,
-      "label": "Domain Name - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
     },
     {
       "name": "ibm_pm_access_token",
@@ -223,9 +147,394 @@
       "group_name": "environment"
     },
     {
+      "name": "ibm_pm_private_ssh_key",
+      "type": "string",
+      "description": "Private CAMC SSH key (base64 encoded) used to connect to the virtual guest.",
+      "hidden": true,
+      "label": "Private CAMC SSH key (base64 encoded) used to connect to the virtual guest. - ssh_keys",
+      "secured": true,
+      "required": true,
+      "immutable": true,
+      "group_name": "ssh_keys",
+      "default": "${advanced_content_runtime_chef.ibm_pm_private_ssh_key}"
+    },
+    {
+      "name": "ibm_pm_public_ssh_key_name",
+      "type": "string",
+      "description": "Public CAMC SSH key name used to connect to the virtual guest.",
+      "hidden": true,
+      "label": "Public CAMC SSH key name used to connect to the virtual guest. - ssh_keys",
+      "secured": false,
+      "required": true,
+      "immutable": true,
+      "group_name": "ssh_keys",
+      "default": "${advanced_content_runtime_chef.ibm_pm_public_ssh_key_name}"
+    },
+    {
+      "name": "user_public_ssh_key",
+      "type": "string",
+      "description": "User defined public SSH key used to connect to the virtual machine. The format must be in openSSH.",
+      "default": "None",
+      "hidden": false,
+      "label": "User Public SSH Key - ssh_keys",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "ssh_keys"
+    },
+    {
+      "name": "WASNode01_local_disk",
+      "type": "string",
+      "description": "User local disk or SAN disk",
+      "default": "false",
+      "hidden": false,
+      "label": "IBMCloud - Local / SAN Disk - WASNode01",
+      "secured": false,
+      "options": [
+        {
+          "value": "true",
+          "label": "True"
+        },
+        {
+          "value": "false",
+          "label": "False",
+          "default": "true"
+        }
+      ],
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "wasnode01"
+    },
+    {
+      "name": "WASNode01_datacenter",
+      "type": "string",
+      "description": "IBMCloud datacenter where infrastructure resources will be deployed",
+      "default": "dal09",
+      "hidden": false,
+      "label": "IBMCloud Datacenter - WASNode01",
+      "secured": false,
+      "options": [
+        {
+          "value": "ams01",
+          "label": "Amsterdam 01, The Netherlands"
+        },
+        {
+          "value": "ams03",
+          "label": "Amsterdam 03, The Netherlands"
+        },
+        {
+          "value": "che01",
+          "label": "Chennai, India"
+        },
+        {
+          "value": "dal01",
+          "label": "Dallas 01, USA"
+        },
+        {
+          "value": "dal02",
+          "label": "Dallas 02, USA"
+        },
+        {
+          "value": "dal05",
+          "label": "Dallas 05, USA"
+        },
+        {
+          "value": "dal06",
+          "label": "Dallas 06, USA"
+        },
+        {
+          "value": "dal07",
+          "label": "Dallas 07, USA"
+        },
+        {
+          "value": "dal09",
+          "label": "Dallas 09, USA",
+          "default": "true"
+        },
+        {
+          "value": "dal10",
+          "label": "Dallas 10, USA"
+        },
+        {
+          "value": "fra02",
+          "label": "Frankfurt, Germany"
+        },
+        {
+          "value": "hkg02",
+          "label": "Hong Kong, China"
+        },
+        {
+          "value": "hou02",
+          "label": "Houston, USA"
+        },
+        {
+          "value": "lon02",
+          "label": "London, England"
+        },
+        {
+          "value": "mel01",
+          "label": "Melbourne, Australia"
+        },
+        {
+          "value": "mil01",
+          "label": "Milan, Italy"
+        },
+        {
+          "value": "mon01",
+          "label": "Montreal, Canada"
+        },
+        {
+          "value": "osl01",
+          "label": "Oslo, Norway"
+        },
+        {
+          "value": "par01",
+          "label": "Paris, France"
+        },
+        {
+          "value": "mex01",
+          "label": "Querétaro, Mexico"
+        },
+        {
+          "value": "sjc01",
+          "label": "San Jose 01, USA"
+        },
+        {
+          "value": "sjc03",
+          "label": "San Jose 03, USA"
+        },
+        {
+          "value": "sao01",
+          "label": "Sao Paulo, Brazil"
+        },
+        {
+          "value": "sea01",
+          "label": "Seattle, USA"
+        },
+        {
+          "value": "seo01",
+          "label": "Seoul 01, Korea"
+        },
+        {
+          "value": "sng01",
+          "label": "Singapore, Singapore"
+        },
+        {
+          "value": "syd01",
+          "label": "Sydney, Australia"
+        },
+        {
+          "value": "tok02",
+          "label": "Tokyo, Japan"
+        },
+        {
+          "value": "tor01",
+          "label": "Toronto, Canada"
+        },
+        {
+          "value": "wdc01",
+          "label": "Washington, D.C. 01, USA"
+        },
+        {
+          "value": "wdc04",
+          "label": "Washington, D.C. 04, USA"
+        }
+      ],
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "wasnode01"
+    },
+    {
+      "name": "WASNode01_dedicated_acct_host_only",
+      "type": "string",
+      "description": "Shared or dedicated host, where dedicated host usually means higher performance and cost",
+      "default": "false",
+      "hidden": false,
+      "label": "IBMCloud Dedicate Account Host - WASNode01",
+      "secured": false,
+      "options": [
+        {
+          "value": "true",
+          "label": "True"
+        },
+        {
+          "value": "false",
+          "label": "False",
+          "default": "true"
+        }
+      ],
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "wasnode01"
+    },
+    {
+      "name": "WASNode01_hourly_billing",
+      "type": "string",
+      "description": "Billing cycle: hourly billed or monthly billed",
+      "default": "true",
+      "hidden": false,
+      "label": "IBMCloud Hourly Billing - WASNode01",
+      "secured": false,
+      "options": [
+        {
+          "value": "true",
+          "label": "True",
+          "default": "true"
+        },
+        {
+          "value": "false",
+          "label": "False"
+        }
+      ],
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "wasnode01"
+    },
+    {
+      "name": "WASNode01_network_speed",
+      "type": "string",
+      "description": "Bandwidth of network communication applied to the virtual machine",
+      "default": 1000,
+      "hidden": false,
+      "label": "IBMCloud Network Speed - WASNode01",
+      "secured": false,
+      "options": [
+        {
+          "value": 100,
+          "label": "100"
+        },
+        {
+          "value": 1000,
+          "label": "1000",
+          "default": "true"
+        }
+      ],
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "wasnode01"
+    },
+    {
+      "name": "WASNode01_private_network_only",
+      "type": "string",
+      "description": "Provision the virtual machine with only private IP",
+      "default": "false",
+      "hidden": false,
+      "label": "IBMCloud Private Network - WASNode01",
+      "secured": false,
+      "options": [
+        {
+          "value": "true",
+          "label": "True"
+        },
+        {
+          "value": "false",
+          "label": "False",
+          "default": "true"
+        }
+      ],
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "wasnode01"
+    },
+    {
+      "name": "WASNode01_memory",
+      "type": "string",
+      "description": "Amount of Memory (MBs), which is required to be one or more times of 1024",
+      "default": 4096,
+      "hidden": false,
+      "label": "IBMCloud VSI Memory - WASNode01",
+      "secured": false,
+      "options": [
+        {
+          "value": 1024,
+          "label": "1024"
+        },
+        {
+          "value": 2048,
+          "label": "2048"
+        },
+        {
+          "value": 4096,
+          "label": "4096",
+          "default": "true"
+        },
+        {
+          "value": 8192,
+          "label": "8192"
+        },
+        {
+          "value": 12288,
+          "label": "12288"
+        },
+        {
+          "value": 16384,
+          "label": "16384"
+        },
+        {
+          "value": 32768,
+          "label": "32768"
+        }
+      ],
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "wasnode01"
+    },
+    {
+      "name": "WASNode01_number_of_cores",
+      "type": "string",
+      "description": "Number of CPU cores, which is required to be a positive Integer",
+      "default": 2,
+      "hidden": false,
+      "label": "IBMCloud VSI Number of Cores - WASNode01",
+      "secured": false,
+      "options": [
+        {
+          "value": 1,
+          "label": "1"
+        },
+        {
+          "value": 2,
+          "label": "2",
+          "default": "true"
+        },
+        {
+          "value": 4,
+          "label": "4"
+        },
+        {
+          "value": 8,
+          "label": "8"
+        },
+        {
+          "value": 12,
+          "label": "12"
+        },
+        {
+          "value": 16,
+          "label": "16"
+        },
+        {
+          "value": 32,
+          "label": "32"
+        }
+      ],
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "wasnode01"
+    },
+    {
       "name": "WASNode01-image",
       "type": "string",
       "description": "Operating system image id / template that should be used when creating the virtual image",
+      "default": "REDHAT_7_64",
       "hidden": false,
       "label": "Operating System ID / Template - WASNode01",
       "secured": false,
@@ -245,39 +554,28 @@
       "group_name": "virtualmachine"
     },
     {
-      "name": "WASNode01-os_password",
+      "name": "WASNode01_root_disk_size",
       "type": "string",
-      "description": "Operating System Password for the Operating System User to access virtual machine",
+      "description": "Root Disk Size - WASNode01",
+      "default": "25",
       "hidden": false,
-      "label": "Operating system password - WASNode01",
-      "secured": true,
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
-      "name": "ibm_pm_private_ssh_key",
-      "type": "string",
-      "description": "Private CAMC SSH key (base64 encoded) used to connect to the virtual guest.",
-      "hidden": true,
-      "label": "Private CAMC SSH key (base64 encoded) used to connect to the virtual guest.",
-      "secured": true,
-      "required": true,
-      "immutable": true,
-      "group_name": "environment",
-      "default": "${advanced_content_runtime_chef.ibm_pm_private_ssh_key}"
-    },
-    {
-      "name": "ibm_pm_public_ssh_key",
-      "type": "string",
-      "description": "Public CAMC SSH key value which is used to connect to a guest, used on VMware only.",
-      "hidden": true,
-      "label": "Public CAMC SSH key value which is used to connect to a guest, used on VMware only.",
+      "label": "Root Disk Size - WASNode01",
       "secured": false,
+      "options": [
+        {
+          "value": "25",
+          "label": "25 GB",
+          "default": true
+        },
+        {
+          "value": "100",
+          "label": "100 GB"
+        }
+      ],
       "required": true,
       "immutable": false,
-      "group_name": "environment",
-      "default": "${advanced_content_runtime_chef.ibm_pm_public_ssh_key}"
+      "immutable_after_create": true,
+      "group_name": "wasnode01"
     },
     {
       "name": "WASNode01-name",
@@ -291,150 +589,27 @@
       "group_name": "virtualmachine"
     },
     {
-      "name": "WASNode01_root_disk_controller_type",
+      "name": "WASNode01-mgmt-network-public",
       "type": "string",
-      "description": "Type of template disk controller",
-      "default": "scsi",
+      "description": "Expose and use public IP of virtual machine for internal communication",
+      "default": "true",
       "hidden": false,
-      "label": "Template Disk Controller - WASNode01",
+      "label": "Use Public Management Network - WASNode01",
       "secured": false,
       "options": [
         {
-          "value": "scsi",
-          "label": "scsi",
-          "default": "true"
+          "value": false,
+          "label": false
         },
         {
-          "value": "scsi-lsi-parallel",
-          "label": "scsi-lsi-parallel"
-        },
-        {
-          "value": "scsi-buslogic",
-          "label": "scsi-buslogic"
-        },
-        {
-          "value": "scsi-paravirtual",
-          "label": "scsi-paravirtual"
-        },
-        {
-          "value": "scsi-isi-sas",
-          "label": "scsi-isi-sas"
-        },
-        {
-          "value": "ide",
-          "label": "ide"
+          "value": true,
+          "label": true
         }
       ],
       "required": true,
       "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
-      "name": "WASNode01_root_disk_datastore",
-      "type": "string",
-      "description": "Data store or storage cluster name for target virtual machine's disks",
-      "hidden": false,
-      "label": "Template Disk Datastore - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
-      "name": "WASNode01_root_disk_type",
-      "type": "string",
-      "description": "Type of template disk volume",
-      "default": "eager_zeroed",
-      "hidden": false,
-      "label": "Template Disk Type - WASNode01",
-      "secured": false,
-      "options": [
-        {
-          "value": "eager_zeroed",
-          "label": "Thick Provision Eager Zeroed",
-          "default": "true"
-        },
-        {
-          "value": "lazy",
-          "label": "Thick Provision Lazy Zeroed"
-        },
-        {
-          "value": "thin",
-          "label": "Thin Provision",
-          "group_name": "virtualmachine"
-        }
-      ],
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
-      "name": "WASNode01_ipv4_gateway",
-      "type": "string",
-      "description": "IPv4 gateway for vNIC configuration",
-      "hidden": false,
-      "label": "Virtual Machine Gateway Address - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
-      "name": "WASNode01_ipv4_address",
-      "type": "string",
-      "description": "IPv4 address for vNIC configuration",
-      "hidden": false,
-      "label": "Virtual Machine IP Address - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
-      "name": "WASNode01_memory",
-      "type": "string",
-      "description": "Memory assigned to the virtual machine in megabytes. This value is required to be an increment of 1024",
-      "default": 2048,
-      "hidden": false,
-      "label": "Virtual Machine Memory - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
-      "name": "WASNode01_ipv4_prefix_length",
-      "type": "string",
-      "description": "IPv4 prefix length for vNIC configuration. The value must be a number between 8 and 32",
-      "hidden": false,
-      "label": "Virtual Machine Netmask Prefix - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
-      "name": "WASNode01_number_of_vcpu",
-      "type": "string",
-      "description": "Number of virtual CPU for the virtual machine, which is required to be a positive Integer",
-      "default": 2,
-      "hidden": false,
-      "label": "Virtual Machine vCPUs - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
-      "name": "WASNode01_network_interface_label",
-      "type": "string",
-      "description": "vSphere port group or network label for virtual machine's vNIC",
-      "hidden": false,
-      "label": "Virtual Machine vSphere Port Group - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
+      "immutable_after_create": true,
+      "group_name": "wasnode01"
     },
     {
       "name": "WASNode01_was_version",
@@ -667,60 +842,16 @@
       "group_name": "wasnode01"
     },
     {
-      "name": "WASNode01_cluster",
+      "name": "runtime_domain",
       "type": "string",
-      "description": "Target vSphere cluster to host the virtual machine",
-      "hidden": false,
-      "label": "vSphere Cluster - WASNode01",
+      "description": "domain name",
+      "default": "${advanced_content_runtime_chef.runtime_domain}",
+      "hidden": true,
+      "label": "domain name",
       "secured": false,
       "required": true,
-      "immutable": false,
+      "immutable": true,
       "group_name": "cloud"
-    },
-    {
-      "name": "WASNode01_datacenter",
-      "type": "string",
-      "description": "Target vSphere datacenter for virtual machine creation",
-      "hidden": false,
-      "label": "vSphere Datacenter - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
-    },
-    {
-      "name": "WASNode01_folder",
-      "type": "string",
-      "description": "Target vSphere folder for virtual machine",
-      "hidden": false,
-      "label": "vSphere Folder Name - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
-    },
-    {
-      "name": "WASNode01_adapter_type",
-      "type": "string",
-      "description": "Network adapter type for vNIC Configuration",
-      "default": "vmxnet3",
-      "hidden": false,
-      "label": "vSphere Network Adapter Type - WASNode01",
-      "secured": false,
-      "options": [
-        {
-          "value": "vmxnet3",
-          "label": "vmxnet3",
-          "default": "true"
-        },
-        {
-          "value": "e1000",
-          "default": "e1000"
-        }
-      ],
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
     }
   ],
   "template_output_params": [
