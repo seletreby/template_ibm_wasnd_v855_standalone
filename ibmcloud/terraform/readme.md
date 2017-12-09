@@ -34,7 +34,7 @@ IBM SDK, Java Technology Edition 8<br>
 <br>
 ### Default Virtual Machine Settings
 
- Cores 1, RAM (GB) 2, SAN Disk (GB) 25<br>
+ Cores 2, RAM (GB) 4, SAN Disk (GB) 100<br>
 <br>
 ### Usage and Special Notes
 

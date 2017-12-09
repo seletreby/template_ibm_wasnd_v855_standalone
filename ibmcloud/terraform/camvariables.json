@@ -12,10 +12,6 @@
       "label": "Cloud Input Variables"
     },
     {
-      "name": "virtualmachine",
-      "label": "Virtual Machine Input Variables"
-    },
-    {
       "name": "ssh_keys",
       "label": "SSH Keys"
     },
@@ -24,12 +20,12 @@
       "label": "Environment"
     },
     {
-      "name": "wasnode01",
-      "label": "WASNode01"
+      "name": "virtualmachine",
+      "label": "Virtual Machine Input Variables"
     },
     {
-      "name": "ungrouped",
-      "label": "ungrouped"
+      "name": "wasnode01",
+      "label": "WASNode01"
     }
   ],
   "output_groups": [
@@ -147,6 +143,29 @@
       "group_name": "environment"
     },
     {
+      "name": "WASNode01_local_disk",
+      "type": "string",
+      "description": "User local disk or SAN disk",
+      "default": "false",
+      "hidden": false,
+      "label": "IBMCloud - Local / SAN Disk - WASNode01",
+      "secured": false,
+      "options": [
+        {
+          "value": "true",
+          "label": "True"
+        },
+        {
+          "value": "false",
+          "label": "False",
+          "default": "true"
+        }
+      ],
+      "required": true,
+      "immutable": false,
+      "group_name": "cloud"
+    },
+    {
       "name": "ibm_pm_private_ssh_key",
       "type": "string",
       "description": "Private CAMC SSH key (base64 encoded) used to connect to the virtual guest.",
@@ -180,31 +199,8 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "group_name": "ssh_keys"
-    },
-    {
-      "name": "WASNode01_local_disk",
-      "type": "string",
-      "description": "User local disk or SAN disk",
-      "default": "false",
-      "hidden": false,
-      "label": "IBMCloud - Local / SAN Disk - WASNode01",
-      "secured": false,
-      "options": [
-        {
-          "value": "true",
-          "label": "True"
-        },
-        {
-          "value": "false",
-          "label": "False",
-          "default": "true"
-        }
-      ],
-      "required": true,
-      "immutable": false,
       "immutable_after_create": true,
-      "group_name": "wasnode01"
+      "group_name": "ssh_keys"
     },
     {
       "name": "WASNode01_datacenter",
@@ -343,8 +339,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
+      "group_name": "cloud"
     },
     {
       "name": "WASNode01_dedicated_acct_host_only",
@@ -367,8 +362,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
+      "group_name": "cloud"
     },
     {
       "name": "WASNode01_hourly_billing",
@@ -391,8 +385,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
+      "group_name": "cloud"
     },
     {
       "name": "WASNode01_network_speed",
@@ -415,8 +408,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
+      "group_name": "cloud"
     },
     {
       "name": "WASNode01_private_network_only",
@@ -439,8 +431,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
+      "group_name": "cloud"
     },
     {
       "name": "WASNode01_memory",
@@ -483,8 +474,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
+      "group_name": "cloud"
     },
     {
       "name": "WASNode01_number_of_cores",
@@ -527,8 +517,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
+      "group_name": "cloud"
     },
     {
       "name": "WASNode01-image",
@@ -564,18 +553,17 @@
       "options": [
         {
           "value": "25",
-          "label": "25 GB",
-          "default": true
+          "label": "25 GB"
         },
         {
           "value": "100",
-          "label": "100 GB"
+          "label": "100 GB",
+          "default": true
         }
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
+      "group_name": "cloud"
     },
     {
       "name": "WASNode01-name",
@@ -586,6 +574,7 @@
       "secured": false,
       "required": true,
       "immutable": false,
+      "immutable_after_create": true,
       "group_name": "virtualmachine"
     },
     {
@@ -594,7 +583,7 @@
       "description": "Expose and use public IP of virtual machine for internal communication",
       "default": "true",
       "hidden": false,
-      "label": "Use Public Management Network - WASNode01",
+      "label": "Use Public Management Network",
       "secured": false,
       "options": [
         {
@@ -608,8 +597,7 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
+      "group_name": "virtualmachine"
     },
     {
       "name": "WASNode01_was_version",
@@ -667,7 +655,7 @@
       "name": "WASNode01_was_profiles_standalone_profiles_standalone1_server",
       "type": "string",
       "description": "Name of the application server",
-      "default": "standalone01",
+      "default": "server1",
       "hidden": true,
       "label": "WebSphere Application Server name - WASNode01",
       "secured": false,

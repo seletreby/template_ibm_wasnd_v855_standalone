@@ -22,17 +22,14 @@ variable "ibm_pm_private_ssh_key" {
 variable "user_public_ssh_key" {
   type = "string"
   description = "User defined public SSH key used to connect to the virtual machine. The format must be in openSSH."
-  default = "None"
 }
 
 variable "aws_ami_owner_id" {
-  description = "The AMI Owner ID"
-  default = "309956199498"
+  description = "AWS AMI Owner ID"
 }
 
 variable "aws_region" {
-  description = "The aws region"
-  default = "us-east-1"
+  description = "AWS Region Name"
 }
 
 ##############################################################
@@ -45,6 +42,10 @@ provider "aws" {
 
 provider "camc" {
   version = "~> 0.1"
+}
+
+provider "template" {
+  version = "~> 1.0"
 }
 
 provider "random" {
@@ -60,7 +61,7 @@ data "aws_vpc" "selected_vpc" {
 
 #Parameter : aws_vpc_name
 variable "aws_vpc_name" {
-  description = "The name of the aws vpc"
+  description = "AWS VPC Name"
 }
 
 data "aws_security_group" "aws_sg_camc_name_selected" {
@@ -70,7 +71,7 @@ data "aws_security_group" "aws_sg_camc_name_selected" {
 
 #Parameter : aws_sg_camc_name
 variable "aws_sg_camc_name" {
-  description = "The name of the aws security group for automation content"
+  description = "AWS Security Group Name"
 }
 
 resource "random_id" "stack_id" {
@@ -85,15 +86,6 @@ variable "ibm_stack_name" {
   description = "A unique stack name."
 }
 
-#### Default OS Admin User Map ####
-variable "default_os_admin_user" {
-  type        = "map"
-  description = "look up os_admin_user using resource image"
-  default = {
-    ubuntu_images_ubuntu_xenial-16.04_099720109477 = "ubuntu"
-    RHEL-7.4_HVM_GA_309956199498                   = "ec2-user"
-  }
-}
 
 ##### Environment variables #####
 #Variable : ibm_im_repo
@@ -112,7 +104,6 @@ variable "ibm_im_repo_password" {
 variable "ibm_im_repo_user" {
   type = "string"
   description = "IBM Software  Installation Manager Repository username"
-  default = "repouser"
 }
 
 #Variable : ibm_pm_access_token
@@ -143,18 +134,24 @@ variable "ibm_sw_repo_password" {
 variable "ibm_sw_repo_user" {
   type = "string"
   description = "IBM Software Repo Username"
-  default = "repouser"
 }
 
 
-##### WASNode01 variables #####
+##### virtualmachine variables #####
 #Variable : WASNode01-flavor
 variable "WASNode01-flavor" {
   type = "string"
   description = "WASNode01 Flavor"
-  default = "t2.small"
 }
 
+#Variable : WASNode01-mgmt-network-public
+variable "WASNode01-mgmt-network-public" {
+  type = "string"
+  description = "Expose and use public IP of virtual machine for internal communication"
+}
+
+
+##### WASNode01 variables #####
 data "aws_ami" "WASNode01_ami" {
   most_recent = true
   filter {
@@ -168,14 +165,6 @@ data "aws_ami" "WASNode01_ami" {
 variable "WASNode01-image" {
   type = "string"
   description = "Operating system image id / template that should be used when creating the virtual image"
-  default = "RHEL-7.4_HVM_GA"
-}
-
-#Variable : WASNode01-mgmt-network-public
-variable "WASNode01-mgmt-network-public" {
-  type = "string"
-  description = "Expose and use public IP of virtual machine for internal communication"
-  default = "true"
 }
 
 #Variable : WASNode01-name
@@ -194,63 +183,54 @@ variable "WASNode01-os_admin_user" {
 variable "WASNode01_was_install_dir" {
   type = "string"
   description = "The installation root directory for the WebSphere Application Server product binaries"
-  default = "/opt/IBM/WebSphere/AppServer"
 }
 
 #Variable : WASNode01_was_java_version
 variable "WASNode01_was_java_version" {
   type = "string"
   description = "The Java SDK version that should be installed with the WebSphere Application Server. Example format is 8.0.4.70"
-  default = "7.1.40.5"
 }
 
 #Variable : WASNode01_was_os_users_was_comment
 variable "WASNode01_was_os_users_was_comment" {
   type = "string"
   description = "Comment that will be added when creating the userid"
-  default = "WAS administrative user"
 }
 
 #Variable : WASNode01_was_os_users_was_gid
 variable "WASNode01_was_os_users_was_gid" {
   type = "string"
   description = "Operating system group name that will be assigned to the product installation"
-  default = "wasgrp"
 }
 
 #Variable : WASNode01_was_os_users_was_home
 variable "WASNode01_was_os_users_was_home" {
   type = "string"
   description = "Home directory location for operating system user that is used for product installation"
-  default = "/home/wasadmin"
 }
 
 #Variable : WASNode01_was_os_users_was_ldap_user
 variable "WASNode01_was_os_users_was_ldap_user" {
   type = "string"
   description = "A flag which indicates whether to create the WebSphere user locally, or utilize an LDAP based user"
-  default = "false"
 }
 
 #Variable : WASNode01_was_os_users_was_name
 variable "WASNode01_was_os_users_was_name" {
   type = "string"
   description = "Operating system userid that will be used to install the product. Userid will be created if it does not exist"
-  default = "wasadmin"
 }
 
 #Variable : WASNode01_was_profile_dir
 variable "WASNode01_was_profile_dir" {
   type = "string"
   description = "The directory path that contains WebSphere Application Server profiles"
-  default = "/opt/IBM/WebSphere/AppServer/profiles"
 }
 
 #Variable : WASNode01_was_profiles_standalone_profiles_standalone1_cell
 variable "WASNode01_was_profiles_standalone_profiles_standalone1_cell" {
   type = "string"
   description = "Cell name for the application server"
-  default = "cell01"
 }
 
 #Variable : WASNode01_was_profiles_standalone_profiles_standalone1_keystorepassword
@@ -263,21 +243,18 @@ variable "WASNode01_was_profiles_standalone_profiles_standalone1_keystorepasswor
 variable "WASNode01_was_profiles_standalone_profiles_standalone1_profile" {
   type = "string"
   description = "Application server profile name"
-  default = "AppSrv01"
 }
 
 #Variable : WASNode01_was_profiles_standalone_profiles_standalone1_server
 variable "WASNode01_was_profiles_standalone_profiles_standalone1_server" {
   type = "string"
   description = "Name of the application server"
-  default = "standalone01"
 }
 
 #Variable : WASNode01_was_security_admin_user
 variable "WASNode01_was_security_admin_user" {
   type = "string"
   description = "The username for securing the WebSphere adminstrative console"
-  default = "wasadmin"
 }
 
 #Variable : WASNode01_was_security_admin_user_pwd
@@ -290,27 +267,23 @@ variable "WASNode01_was_security_admin_user_pwd" {
 variable "WASNode01_was_version" {
   type = "string"
   description = "The release and fixpack level of WebSphere Application Server to be installed. Example formats are 8.5.5.12 or 9.0.0.4"
-  default = "8.5.5.12"
 }
 
 #Variable : WASNode01_was_wsadmin_standalone_jvmproperty_property_value_initial
 variable "WASNode01_was_wsadmin_standalone_jvmproperty_property_value_initial" {
   type = "string"
   description = "Minimum JVM heap size"
-  default = "256"
 }
 
 #Variable : WASNode01_was_wsadmin_standalone_jvmproperty_property_value_maximum
 variable "WASNode01_was_wsadmin_standalone_jvmproperty_property_value_maximum" {
   type = "string"
   description = "Maximum JVM heap size"
-  default = "512"
 }
 
 ##### domain name #####
 variable "runtime_domain" {
   description = "domain name"
-  default = "cam.ibm.com"
 }
 
 
@@ -357,8 +330,7 @@ variable "WASNode01_subnet_name" {
 #Parameter : WASNode01_associate_public_ip_address
 variable "WASNode01_associate_public_ip_address" {
   type = "string"
-  description = "Assign a public IP"
-  default = "true"
+  description = "AWS assign a public IP to instance"
 }
 
 
@@ -366,7 +338,6 @@ variable "WASNode01_associate_public_ip_address" {
 variable "WASNode01_root_block_device_volume_type" {
   type = "string"
   description = "AWS Root Block Device Volume Type"
-  default = "gp2"
 }
 
 
@@ -374,7 +345,6 @@ variable "WASNode01_root_block_device_volume_type" {
 variable "WASNode01_root_block_device_volume_size" {
   type = "string"
   description = "AWS Root Block Device Volume Size"
-  default = "25"
 }
 
 
@@ -382,7 +352,6 @@ variable "WASNode01_root_block_device_volume_size" {
 variable "WASNode01_root_block_device_delete_on_termination" {
   type = "string"
   description = "AWS Root Block Device Delete on Termination"
-  default = "true"
 }
 
 resource "aws_instance" "WASNode01" {
@@ -398,7 +367,7 @@ resource "aws_instance" "WASNode01" {
 
   # Specify the ssh connection
   connection {
-    user = "${var.WASNode01-os_admin_user == "" ? lookup(var.default_os_admin_user, format("%s_%s", replace(var.WASNode01-image, "/", "_"), var.aws_ami_owner_id)) : var.WASNode01-os_admin_user}"
+    user = "${var.WASNode01-os_admin_user}"
     private_key = "${base64decode(var.ibm_pm_private_ssh_key)}"
   }
 
@@ -468,7 +437,7 @@ data "template_cloudinit_config" "WASNode01_init"  {
   part {
     content_type = "text/cloud-config"
     content = <<EOF
-hostname: ${var.WASNode01-name}
+hostname: ${var.WASNode01-name}.${var.runtime_domain}
 fqdn: ${var.WASNode01-name}.${var.runtime_domain}
 manage_etc_hosts: false
 EOF
@@ -488,7 +457,7 @@ resource "camc_bootstrap" "WASNode01_chef_bootstrap_comp" {
   trace = true
   data = <<EOT
 {
-  "os_admin_user": "${var.WASNode01-os_admin_user == "default"? lookup(var.default_os_admin_user, format("%s_%s", replace(var.WASNode01-image, "/", "_"), var.aws_ami_owner_id)) : var.WASNode01-os_admin_user}",
+  "os_admin_user": "${var.WASNode01-os_admin_user}",
   "stack_id": "${random_id.stack_id.hex}",
   "environment_name": "_default",
   "host_ip": "${var.WASNode01-mgmt-network-public == "false" ? aws_instance.WASNode01.private_ip : aws_instance.WASNode01.public_ip}",
@@ -521,7 +490,7 @@ resource "camc_softwaredeploy" "WASNode01_was_create_standalone" {
   trace = true
   data = <<EOT
 {
-  "os_admin_user": "${var.WASNode01-os_admin_user == "default"? lookup(var.default_os_admin_user, format("%s_%s", replace(var.WASNode01-image, "/", "_"), var.aws_ami_owner_id)) : var.WASNode01-os_admin_user}",
+  "os_admin_user": "${var.WASNode01-os_admin_user}",
   "stack_id": "${random_id.stack_id.hex}",
   "environment_name": "_default",
   "host_ip": "${var.WASNode01-mgmt-network-public == "false" ? aws_instance.WASNode01.private_ip : aws_instance.WASNode01.public_ip}",
@@ -584,7 +553,7 @@ resource "camc_softwaredeploy" "WASNode01_was_v855_install" {
   trace = true
   data = <<EOT
 {
-  "os_admin_user": "${var.WASNode01-os_admin_user == "default"? lookup(var.default_os_admin_user, format("%s_%s", replace(var.WASNode01-image, "/", "_"), var.aws_ami_owner_id)) : var.WASNode01-os_admin_user}",
+  "os_admin_user": "${var.WASNode01-os_admin_user}",
   "stack_id": "${random_id.stack_id.hex}",
   "environment_name": "_default",
   "host_ip": "${var.WASNode01-mgmt-network-public == "false" ? aws_instance.WASNode01.private_ip : aws_instance.WASNode01.public_ip}",

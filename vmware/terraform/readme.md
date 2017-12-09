@@ -34,7 +34,7 @@ IBM SDK, Java Technology Edition 8<br>
 <br>
 ### Default Virtual Machine Settings
 
- vCPU 1, Memory (GB) 2<br>
+ vCPU 2, Memory (GB) 4<br>
 <br>
 ### Usage and Special Notes
 

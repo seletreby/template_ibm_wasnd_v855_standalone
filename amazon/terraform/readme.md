@@ -34,7 +34,7 @@ IBM SDK, Java Technology Edition 8<br>
 <br>
 ### Default Virtual Machine Settings
 
- t2.small, vCPU 1, Mem (GiB) 2, EBS (GB) 25<br>
+ t2.medium, vCPU 2, Mem (GiB) 4, EBS (GB) 100<br>
 <br>
 ### Usage and Special Notes
 

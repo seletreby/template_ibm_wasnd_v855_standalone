@@ -12,16 +12,16 @@
       "label": "Cloud Input Variables"
     },
     {
-      "name": "virtualmachine",
-      "label": "Virtual Machine Input Variables"
-    },
-    {
       "name": "ssh_keys",
       "label": "SSH Keys"
     },
     {
       "name": "environment",
       "label": "Environment"
+    },
+    {
+      "name": "virtualmachine",
+      "label": "Virtual Machine Input Variables"
     },
     {
       "name": "wasnode01",
@@ -68,6 +68,7 @@
       "secured": false,
       "required": true,
       "immutable": false,
+      "immutable_after_create": true,
       "group_name": "ssh_keys"
     },
     {
@@ -394,7 +395,7 @@
       "name": "WASNode01_memory",
       "type": "string",
       "description": "Memory assigned to the virtual machine in megabytes. This value is required to be an increment of 1024",
-      "default": 2048,
+      "default": 4096,
       "hidden": false,
       "label": "Virtual Machine Memory - WASNode01",
       "secured": false,
@@ -492,7 +493,7 @@
       "name": "WASNode01_was_profiles_standalone_profiles_standalone1_server",
       "type": "string",
       "description": "Name of the application server",
-      "default": "standalone01",
+      "default": "server1",
       "hidden": true,
       "label": "WebSphere Application Server name - WASNode01",
       "secured": false,
