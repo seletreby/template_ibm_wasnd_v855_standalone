@@ -1,7 +1,7 @@
 {
     "name": "IBM WebSphere Network Deployment V8.5.5 on a single virtual machine - VMware vSphere",
     "description": "This template deploys a standalone instance of WebSphere Application Server Network Deployment 8.5.5 on a Linux virtual machine.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "imageUrl": "",
     "image": "",
     "type": "chefcontent",
@@ -31,7 +31,7 @@
     "description": " VMware<br>"},
 {
     "title": "Template Version",
-    "description": "1.0.1<br>"},
+    "description": "1.0.2<br>"},
 {
     "title": "Operating Systems Supported",
     "description": "Red Hat Enterprise Linux 7<br>Red Hat Enterprise Linux 6<br>Ubuntu 16.04 LTS<br>Ubuntu 14.04 LTS<br>"},
