@@ -1,11 +1,11 @@
 {
-  "input_namespaces": [
+  "input_datatypes": [
     {
       "name": "advanced_content_runtime_chef",
       "label": "Advanced Content Runtime"
     }
   ],
-  "output_namespace": "content_template_output",
+  "output_datatype": "content_template_output",
   "input_groups": [
     {
       "name": "cloud",
@@ -35,6 +35,17 @@
     }
   ],
   "template_input_params": [
+    {
+      "name": "ibm_stack_id",
+      "type": "string",
+      "description": "A unique stack id.",
+      "hidden": true,
+      "label": "A unique stack id.",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "environment"
+    },
     {
       "name": "ibm_stack_name",
       "type": "string",
@@ -79,6 +90,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment",
       "default": "${advanced_content_runtime_chef.ibm_im_repo}"
     },
@@ -104,6 +116,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment"
     },
     {
@@ -115,6 +128,7 @@
       "secured": true,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment",
       "default": "${advanced_content_runtime_chef.ibm_sw_repo_password}"
     },
@@ -127,6 +141,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment",
       "default": "${advanced_content_runtime_chef.ibm_sw_repo}"
     },
@@ -140,6 +155,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment"
     },
     {
@@ -546,7 +562,7 @@
       "name": "WASNode01_root_disk_size",
       "type": "string",
       "description": "Root Disk Size - WASNode01",
-      "default": "25",
+      "default": "100",
       "hidden": false,
       "label": "Root Disk Size - WASNode01",
       "secured": false,
@@ -574,7 +590,6 @@
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
       "group_name": "virtualmachine"
     },
     {
@@ -602,8 +617,8 @@
     {
       "name": "WASNode01_was_version",
       "type": "string",
-      "description": "The release and fixpack level of WebSphere Application Server to be installed. Example formats are 8.5.5.12 or 9.0.0.4",
-      "default": "8.5.5.12",
+      "description": "The release and fixpack level of WebSphere Application Server to be installed. Example formats are 8.5.5.13 or 9.0.0.6",
+      "default": "8.5.5.13",
       "hidden": false,
       "label": "WebSphere Application Server Version - WASNode01",
       "secured": false,
@@ -617,7 +632,7 @@
       "type": "string",
       "description": "Cell name for the application server",
       "default": "cell01",
-      "hidden": true,
+      "hidden": false,
       "label": "WebSphere Application Server cell name - WASNode01",
       "secured": false,
       "required": true,
@@ -681,7 +696,7 @@
       "name": "WASNode01_was_java_version",
       "type": "string",
       "description": "The Java SDK version that should be installed with the WebSphere Application Server. Example format is 8.0.4.70",
-      "default": "7.1.40.5",
+      "default": "7.1.4.15",
       "hidden": false,
       "label": "WebSphere Java SDK version - WASNode01",
       "secured": false,
@@ -732,7 +747,7 @@
       "type": "string",
       "description": "Operating system userid that will be used to install the product. Userid will be created if it does not exist",
       "default": "wasadmin",
-      "hidden": true,
+      "hidden": false,
       "label": "WebSphere installation userid - WASNode01",
       "secured": false,
       "required": true,
@@ -821,7 +836,7 @@
       "type": "string",
       "description": "Operating system group name that will be assigned to the product installation",
       "default": "wasgrp",
-      "hidden": true,
+      "hidden": false,
       "label": "WebSphere user group name - WASNode01",
       "secured": false,
       "required": true,

@@ -1,5 +1,5 @@
 # Template - IBM WebSphere Network Deployment V8.5.5 on a single virtual machine
-Template Version - 1.0
+Template Version - 2.0
 
 ## Description
 
@@ -10,10 +10,6 @@ This template deploys a standalone instance of WebSphere Application Server Netw
 ### Clouds
 
  VMware<br>
-<br>
-### Template Version
-
-1.0<br>
 <br>
 ### Operating Systems Supported
 
@@ -34,14 +30,14 @@ IBM SDK, Java Technology Edition 8<br>
 <br>
 ### Default Virtual Machine Settings
 
- vCPU 2, Memory (GB) 4<br>
+ vCPU 2, Memory (GB) 4, Disk (GB) 100<br>
 <br>
 ### Usage and Special Notes
 
 1. The user is responsible for obtaining appropriate software licenses and downloads prior to template deployment.<br>
 2. Detailed system requirements for WAS ND 8.5.5 - <a href=\"https://www.ibm.com/software/reports/compatibility/clarity/index.html\" target=\"_blank\">https://www.ibm.com/software/reports/compatibility/clarity/index.html</a><br>
 3. IBM Knowledge Center for WAS ND 8.5.5 - <a href=\"https://www.ibm.com/support/knowledgecenter/en/SSAW57_8.5.5\" target=\"_blank\">https://www.ibm.com/support/knowledgecenter/en/SSAW57_8.5.5</a><br>
-4. IBM Support Portal - <a href=\"https://www.ibm.com/support/home/\" target=\"_blank\">https://www.ibm.com/support/home/</a><br>
+4. IBM Support Portal - <a href=\"https://www.ibm.com/support/home/\" target=\"_blank\">https://www.ibm.com/support/home/ </a><br>
 <br>
 
 
@@ -49,7 +45,7 @@ IBM SDK, Java Technology Edition 8<br>
 
 ### License and Maintainer
 
-Copyright IBM Corp. 2016, 2017 
+Copyright IBM Corp. 2017, 2018 
 
 ### Target Cloud Type
 
@@ -67,8 +63,8 @@ VMware vSphere
 
 ### Minor Versions
 
-- IBM WebSphere  8.5.5.12
-- IBM WebSphere  9.0.0.4
+- IBM WebSphere  8.5.5.13
+- IBM WebSphere  9.0.0.6
 
 
 *Note, these represent base versions only, explicit fixpacks may also be added.*
@@ -283,13 +279,13 @@ The following files are neccessary on the Software Repository to successfully in
     <td>8.5.5</td>
     <td>X86_64</td>
     <td>IM Repository File</td>
-    <td><br>com.ibm.websphere.IHS.v85_8.5.5011.20161206_1434</br><br>com.ibm.websphere.ND.v85_8.5.5011.20161206_1434</br><br>com.ibm.websphere.PLG.v85_8.5.5011.20161206_1434</br><br>com.ibm.websphere.WCT.v85_8.5.5011.20161206_1434</br></td>
+    <td><br>com.ibm.websphere.IHS.v85_8.5.5013.20180112_1418</br><br>com.ibm.websphere.ND.v85_8.5.5013.20180112_1418</br><br>com.ibm.websphere.PLG.v85_8.5.5013.20180112_1418</br><br>com.ibm.websphere.WCT.v85_8.5.5013.20180112_1418</br></td>
   </tr>
   <tr>
     <td>9.0.0</td>
     <td>X86_64</td>
     <td>IM Repository File</td>
-    <td><br>com.ibm.websphere.BASE.v90_9.0.4.20170523_1327</br><br>com.ibm.websphere.IHS.v90_9.0.4.20170523_1327</br><br>com.ibm.websphere.ND.v90_9.0.4.20170523_1327</br><br>com.ibm.websphere.PLG.v90_9.0.4.20170523_1327</br><br>com.ibm.websphere.WCT.v90_9.0.4.20170523_1327</br></td>
+    <td><br>com.ibm.websphere.BASE.v90_9.0.6.20171205_1311</br><br>com.ibm.websphere.IHS.v90_9.0.6.20171205_1311</br><br>com.ibm.websphere.ND.v90_9.0.6.20171205_1311</br><br>com.ibm.websphere.PLG.v90_9.0.6.20171205_1311</br><br>com.ibm.websphere.WCT.v90_9.0.6.20171205_1311</br></td>
   </tr>
 </table>
 
