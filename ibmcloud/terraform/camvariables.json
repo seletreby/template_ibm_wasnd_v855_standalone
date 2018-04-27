@@ -96,7 +96,7 @@
     },
     {
       "name": "ibm_im_repo_password",
-      "type": "string",
+      "type": "password",
       "description": "IBM Software  Installation Manager Repository Password",
       "hidden": true,
       "label": "IBM Software Installation Manager Repository Password",
@@ -121,7 +121,7 @@
     },
     {
       "name": "ibm_sw_repo_password",
-      "type": "string",
+      "type": "password",
       "description": "IBM Software Repo Password",
       "hidden": true,
       "label": "IBM Software Repo Password",
@@ -306,7 +306,7 @@
         },
         {
           "value": "mex01",
-          "label": "Querétaro, Mexico"
+          "label": "Quer\u00e9taro, Mexico"
         },
         {
           "value": "sjc01",
@@ -720,7 +720,7 @@
     },
     {
       "name": "WASNode01_was_security_admin_user_pwd",
-      "type": "string",
+      "type": "password",
       "description": "The password for the WebSphere administrative account",
       "hidden": false,
       "label": "WebSphere administrative user password - WASNode01",
@@ -732,7 +732,7 @@
     },
     {
       "name": "WASNode01_was_profiles_standalone_profiles_standalone1_keystorepassword",
-      "type": "string",
+      "type": "password",
       "description": "Specifies the password to use on all keystore files created during profile creation",
       "hidden": false,
       "label": "WebSphere default keystore password - WASNode01",

@@ -21,9 +21,9 @@
 # Keys - CAMC (public/private) & optional User Key (public)
 ##############################################################
 variable "user_public_ssh_key" {
-  type = "string"
+  type        = "string"
   description = "User defined public SSH key used to connect to the virtual machine. The format must be in openSSH."
-  default = "None"
+  default     = "None"
 }
 
 variable "ibm_stack_id" {
@@ -40,7 +40,7 @@ variable "ibm_pm_private_ssh_key" {
 
 variable "allow_unverified_ssl" {
   description = "Communication with vsphere server with self signed certificate"
-  default = "true"
+  default     = "true"
 }
 
 ##############################################################
@@ -48,7 +48,7 @@ variable "allow_unverified_ssl" {
 ##############################################################
 provider "vsphere" {
   allow_unverified_ssl = "${var.allow_unverified_ssl}"
-  version = "~> 1.3"
+  version              = "~> 1.3"
 }
 
 provider "camc" {
@@ -69,224 +69,226 @@ variable "ibm_stack_name" {
 data "vsphere_datacenter" "WASNode01_datacenter" {
   name = "${var.WASNode01_datacenter}"
 }
+
 data "vsphere_datastore" "WASNode01_datastore" {
-  name = "${var.WASNode01_root_disk_datastore}"
+  name          = "${var.WASNode01_root_disk_datastore}"
   datacenter_id = "${data.vsphere_datacenter.WASNode01_datacenter.id}"
 }
+
 data "vsphere_resource_pool" "WASNode01_resource_pool" {
-  name = "${var.WASNode01_resource_pool}"
+  name          = "${var.WASNode01_resource_pool}"
   datacenter_id = "${data.vsphere_datacenter.WASNode01_datacenter.id}"
 }
+
 data "vsphere_network" "WASNode01_network" {
-  name = "${var.WASNode01_network_interface_label}"
+  name          = "${var.WASNode01_network_interface_label}"
   datacenter_id = "${data.vsphere_datacenter.WASNode01_datacenter.id}"
 }
 
 data "vsphere_virtual_machine" "WASNode01_template" {
-  name = "${var.WASNode01-image}"
+  name          = "${var.WASNode01-image}"
   datacenter_id = "${data.vsphere_datacenter.WASNode01_datacenter.id}"
 }
 
 ##### Environment variables #####
 #Variable : ibm_im_repo
 variable "ibm_im_repo" {
-  type = "string"
+  type        = "string"
   description = "IBM Software  Installation Manager Repository URL (https://<hostname/IP>:<port>/IMRepo) "
 }
 
 #Variable : ibm_im_repo_password
 variable "ibm_im_repo_password" {
-  type = "string"
+  type        = "string"
   description = "IBM Software  Installation Manager Repository Password"
 }
 
 #Variable : ibm_im_repo_user
 variable "ibm_im_repo_user" {
-  type = "string"
+  type        = "string"
   description = "IBM Software  Installation Manager Repository username"
-  default = "repouser"
+  default     = "repouser"
 }
 
 #Variable : ibm_pm_access_token
 variable "ibm_pm_access_token" {
-  type = "string"
+  type        = "string"
   description = "IBM Pattern Manager Access Token"
 }
 
 #Variable : ibm_pm_service
 variable "ibm_pm_service" {
-  type = "string"
+  type        = "string"
   description = "IBM Pattern Manager Service"
 }
 
 #Variable : ibm_sw_repo
 variable "ibm_sw_repo" {
-  type = "string"
+  type        = "string"
   description = "IBM Software Repo Root (https://<hostname>:<port>)"
 }
 
 #Variable : ibm_sw_repo_password
 variable "ibm_sw_repo_password" {
-  type = "string"
+  type        = "string"
   description = "IBM Software Repo Password"
 }
 
 #Variable : ibm_sw_repo_user
 variable "ibm_sw_repo_user" {
-  type = "string"
+  type        = "string"
   description = "IBM Software Repo Username"
-  default = "repouser"
+  default     = "repouser"
 }
-
 
 ##### virtualmachine variables #####
 
 ##### WASNode01 variables #####
 #Variable : WASNode01-image
 variable "WASNode01-image" {
-  type = "string"
+  type        = "string"
   description = "Operating system image id / template that should be used when creating the virtual image"
 }
 
 #Variable : WASNode01-name
 variable "WASNode01-name" {
-  type = "string"
+  type        = "string"
   description = "Short hostname of virtual machine"
 }
 
 #Variable : WASNode01-os_admin_user
 variable "WASNode01-os_admin_user" {
-  type = "string"
+  type        = "string"
   description = "Name of the admin user account in the virtual machine that will be accessed via SSH"
 }
 
 #Variable : WASNode01_was_install_dir
 variable "WASNode01_was_install_dir" {
-  type = "string"
+  type        = "string"
   description = "The installation root directory for the WebSphere Application Server product binaries"
-  default = "/opt/IBM/WebSphere/AppServer"
+  default     = "/opt/IBM/WebSphere/AppServer"
 }
 
 #Variable : WASNode01_was_java_version
 variable "WASNode01_was_java_version" {
-  type = "string"
+  type        = "string"
   description = "The Java SDK version that should be installed with the WebSphere Application Server. Example format is 8.0.4.70"
-  default = "7.1.4.15"
+  default     = "7.1.4.15"
 }
 
 #Variable : WASNode01_was_os_users_was_comment
 variable "WASNode01_was_os_users_was_comment" {
-  type = "string"
+  type        = "string"
   description = "Comment that will be added when creating the userid"
-  default = "WAS administrative user"
+  default     = "WAS administrative user"
 }
 
 #Variable : WASNode01_was_os_users_was_gid
 variable "WASNode01_was_os_users_was_gid" {
-  type = "string"
+  type        = "string"
   description = "Operating system group name that will be assigned to the product installation"
-  default = "wasgrp"
+  default     = "wasgrp"
 }
 
 #Variable : WASNode01_was_os_users_was_home
 variable "WASNode01_was_os_users_was_home" {
-  type = "string"
+  type        = "string"
   description = "Home directory location for operating system user that is used for product installation"
-  default = "/home/wasadmin"
+  default     = "/home/wasadmin"
 }
 
 #Variable : WASNode01_was_os_users_was_ldap_user
 variable "WASNode01_was_os_users_was_ldap_user" {
-  type = "string"
+  type        = "string"
   description = "A flag which indicates whether to create the WebSphere user locally, or utilize an LDAP based user"
-  default = "false"
+  default     = "false"
 }
 
 #Variable : WASNode01_was_os_users_was_name
 variable "WASNode01_was_os_users_was_name" {
-  type = "string"
+  type        = "string"
   description = "Operating system userid that will be used to install the product. Userid will be created if it does not exist"
-  default = "wasadmin"
+  default     = "wasadmin"
 }
 
 #Variable : WASNode01_was_profile_dir
 variable "WASNode01_was_profile_dir" {
-  type = "string"
+  type        = "string"
   description = "The directory path that contains WebSphere Application Server profiles"
-  default = "/opt/IBM/WebSphere/AppServer/profiles"
+  default     = "/opt/IBM/WebSphere/AppServer/profiles"
 }
 
 #Variable : WASNode01_was_profiles_standalone_profiles_standalone1_cell
 variable "WASNode01_was_profiles_standalone_profiles_standalone1_cell" {
-  type = "string"
+  type        = "string"
   description = "Cell name for the application server"
-  default = "cell01"
+  default     = "cell01"
 }
 
 #Variable : WASNode01_was_profiles_standalone_profiles_standalone1_keystorepassword
 variable "WASNode01_was_profiles_standalone_profiles_standalone1_keystorepassword" {
-  type = "string"
+  type        = "string"
   description = "Specifies the password to use on all keystore files created during profile creation"
 }
 
 #Variable : WASNode01_was_profiles_standalone_profiles_standalone1_profile
 variable "WASNode01_was_profiles_standalone_profiles_standalone1_profile" {
-  type = "string"
+  type        = "string"
   description = "Application server profile name"
-  default = "AppSrv01"
+  default     = "AppSrv01"
 }
 
 #Variable : WASNode01_was_profiles_standalone_profiles_standalone1_server
 variable "WASNode01_was_profiles_standalone_profiles_standalone1_server" {
-  type = "string"
+  type        = "string"
   description = "Name of the application server"
-  default = "server1"
+  default     = "server1"
 }
 
 #Variable : WASNode01_was_security_admin_user
 variable "WASNode01_was_security_admin_user" {
-  type = "string"
+  type        = "string"
   description = "The username for securing the WebSphere adminstrative console"
-  default = "wasadmin"
+  default     = "wasadmin"
 }
 
 #Variable : WASNode01_was_security_admin_user_pwd
 variable "WASNode01_was_security_admin_user_pwd" {
-  type = "string"
+  type        = "string"
   description = "The password for the WebSphere administrative account"
 }
 
 #Variable : WASNode01_was_version
 variable "WASNode01_was_version" {
-  type = "string"
+  type        = "string"
   description = "The release and fixpack level of WebSphere Application Server to be installed. Example formats are 8.5.5.13 or 9.0.0.6"
-  default = "8.5.5.13"
+  default     = "8.5.5.13"
 }
 
 #Variable : WASNode01_was_wsadmin_standalone_jvmproperty_property_value_initial
 variable "WASNode01_was_wsadmin_standalone_jvmproperty_property_value_initial" {
-  type = "string"
+  type        = "string"
   description = "Minimum JVM heap size"
-  default = "256"
+  default     = "256"
 }
 
 #Variable : WASNode01_was_wsadmin_standalone_jvmproperty_property_value_maximum
 variable "WASNode01_was_wsadmin_standalone_jvmproperty_property_value_maximum" {
-  type = "string"
+  type        = "string"
   description = "Maximum JVM heap size"
-  default = "512"
+  default     = "512"
 }
-
 
 #########################################################
 ##### Resource : VaultItem
 #########################################################
 
 resource "camc_vaultitem" "VaultItem" {
-  camc_endpoint = "${var.ibm_pm_service}/v1/vault_item/chef"
-  access_token = "${var.ibm_pm_access_token}"
+  camc_endpoint   = "${var.ibm_pm_service}/v1/vault_item/chef"
+  access_token    = "${var.ibm_pm_access_token}"
   skip_ssl_verify = true
-  trace = true
+  trace           = true
+
   data = <<EOT
 {
   "vault_content": {
@@ -298,13 +300,12 @@ resource "camc_vaultitem" "VaultItem" {
 EOT
 }
 
-
 #########################################################
 ##### Resource : WASNode01
 #########################################################
 
 variable "WASNode01-os_password" {
-  type = "string"
+  type        = "string"
   description = "Operating System Password for the Operating System User to access virtual machine"
 }
 
@@ -322,12 +323,12 @@ variable "WASNode01_domain" {
 
 variable "WASNode01_number_of_vcpu" {
   description = "Number of virtual CPU for the virtual machine, which is required to be a positive Integer"
-  default = "2"
+  default     = "2"
 }
 
 variable "WASNode01_memory" {
   description = "Memory assigned to the virtual machine in megabytes. This value is required to be an increment of 1024"
-  default = "4096"
+  default     = "4096"
 }
 
 variable "WASNode01_cluster" {
@@ -339,12 +340,12 @@ variable "WASNode01_resource_pool" {
 }
 
 variable "WASNode01_dns_suffixes" {
-  type = "list"
+  type        = "list"
   description = "Name resolution suffixes for the virtual network adapter"
 }
 
 variable "WASNode01_dns_servers" {
-  type = "list"
+  type        = "list"
   description = "DNS servers for the virtual network adapter"
 }
 
@@ -366,7 +367,7 @@ variable "WASNode01_ipv4_prefix_length" {
 
 variable "WASNode01_adapter_type" {
   description = "Network adapter type for vNIC Configuration"
-  default = "vmxnet3"
+  default     = "vmxnet3"
 }
 
 variable "WASNode01_root_disk_datastore" {
@@ -374,63 +375,69 @@ variable "WASNode01_root_disk_datastore" {
 }
 
 variable "WASNode01_root_disk_keep_on_remove" {
-  type = "string"
+  type        = "string"
   description = "Delete template disk volume when the virtual machine is deleted"
-  default = "false"
+  default     = "false"
 }
 
 variable "WASNode01_root_disk_size" {
   description = "Size of template disk volume. Should be equal to template's disk size"
-  default = "100"
+  default     = "100"
 }
 
 # vsphere vm
 resource "vsphere_virtual_machine" "WASNode01" {
-  name = "${var.WASNode01-name}"
-  folder = "${var.WASNode01_folder}"
-  num_cpus = "${var.WASNode01_number_of_vcpu}"
-  memory = "${var.WASNode01_memory}"
+  name             = "${var.WASNode01-name}"
+  folder           = "${var.WASNode01_folder}"
+  num_cpus         = "${var.WASNode01_number_of_vcpu}"
+  memory           = "${var.WASNode01_memory}"
   resource_pool_id = "${data.vsphere_resource_pool.WASNode01_resource_pool.id}"
-  datastore_id = "${data.vsphere_datastore.WASNode01_datastore.id}"
-  guest_id = "${data.vsphere_virtual_machine.WASNode01_template.guest_id}"
+  datastore_id     = "${data.vsphere_datastore.WASNode01_datastore.id}"
+  guest_id         = "${data.vsphere_virtual_machine.WASNode01_template.guest_id}"
+  scsi_type        = "${data.vsphere_virtual_machine.WASNode01_template.scsi_type}"
+
   clone {
     template_uuid = "${data.vsphere_virtual_machine.WASNode01_template.id}"
+
     customize {
       linux_options {
-        domain = "${var.WASNode01_domain}"
+        domain    = "${var.WASNode01_domain}"
         host_name = "${var.WASNode01-name}"
       }
-    network_interface {
-      ipv4_address = "${var.WASNode01_ipv4_address}"
-      ipv4_netmask = "${var.WASNode01_ipv4_prefix_length}"
-    }
-    ipv4_gateway = "${var.WASNode01_ipv4_gateway}"
-    dns_suffix_list = "${var.WASNode01_dns_suffixes}"
-    dns_server_list = "${var.WASNode01_dns_servers}"
+
+      network_interface {
+        ipv4_address = "${var.WASNode01_ipv4_address}"
+        ipv4_netmask = "${var.WASNode01_ipv4_prefix_length}"
+      }
+
+      ipv4_gateway    = "${var.WASNode01_ipv4_gateway}"
+      dns_suffix_list = "${var.WASNode01_dns_suffixes}"
+      dns_server_list = "${var.WASNode01_dns_servers}"
     }
   }
 
   network_interface {
-    network_id = "${data.vsphere_network.WASNode01_network.id}"
+    network_id   = "${data.vsphere_network.WASNode01_network.id}"
     adapter_type = "${var.WASNode01_adapter_type}"
   }
 
   disk {
-    label = "${var.WASNode01-name}.disk0"
-    size = "${var.WASNode01_root_disk_size}"
+    label          = "${var.WASNode01-name}.disk0"
+    size           = "${var.WASNode01_root_disk_size}"
     keep_on_remove = "${var.WASNode01_root_disk_keep_on_remove}"
   }
 
   # Specify the connection
   connection {
-    type = "ssh"
-    user = "${var.WASNode01-os_admin_user}"
+    type     = "ssh"
+    user     = "${var.WASNode01-os_admin_user}"
     password = "${var.WASNode01-os_password}"
   }
 
   provisioner "file" {
     destination = "WASNode01_add_ssh_key.sh"
-    content     = <<EOF
+
+    content = <<EOF
 # =================================================================
 # Copyright 2017 IBM Corporation
 #
@@ -499,10 +506,9 @@ EOF
   provisioner "remote-exec" {
     inline = [
       "bash -c 'chmod +x WASNode01_add_ssh_key.sh'",
-      "bash -c './WASNode01_add_ssh_key.sh  \"${var.WASNode01-os_admin_user}\" \"${var.user_public_ssh_key}\" \"${var.ibm_pm_public_ssh_key}\">> WASNode01_add_ssh_key.log 2>&1'"
+      "bash -c './WASNode01_add_ssh_key.sh  \"${var.WASNode01-os_admin_user}\" \"${var.user_public_ssh_key}\" \"${var.ibm_pm_public_ssh_key}\">> WASNode01_add_ssh_key.log 2>&1'",
     ]
   }
-
 }
 
 #########################################################
@@ -510,12 +516,13 @@ EOF
 #########################################################
 
 resource "camc_bootstrap" "WASNode01_chef_bootstrap_comp" {
-  depends_on = ["camc_vaultitem.VaultItem","vsphere_virtual_machine.WASNode01"]
-  name = "WASNode01_chef_bootstrap_comp"
-  camc_endpoint = "${var.ibm_pm_service}/v1/bootstrap/chef"
-  access_token = "${var.ibm_pm_access_token}"
+  depends_on      = ["camc_vaultitem.VaultItem", "vsphere_virtual_machine.WASNode01"]
+  name            = "WASNode01_chef_bootstrap_comp"
+  camc_endpoint   = "${var.ibm_pm_service}/v1/bootstrap/chef"
+  access_token    = "${var.ibm_pm_access_token}"
   skip_ssl_verify = true
-  trace = true
+  trace           = true
+
   data = <<EOT
 {
   "os_admin_user": "${var.WASNode01-os_admin_user}",
@@ -537,18 +544,18 @@ resource "camc_bootstrap" "WASNode01_chef_bootstrap_comp" {
 EOT
 }
 
-
 #########################################################
 ##### Resource : WASNode01_was_create_standalone
 #########################################################
 
 resource "camc_softwaredeploy" "WASNode01_was_create_standalone" {
-  depends_on = ["camc_softwaredeploy.WASNode01_was_v855_install"]
-  name = "WASNode01_was_create_standalone"
-  camc_endpoint = "${var.ibm_pm_service}/v1/software_deployment/chef"
-  access_token = "${var.ibm_pm_access_token}"
+  depends_on      = ["camc_softwaredeploy.WASNode01_was_v855_install"]
+  name            = "WASNode01_was_create_standalone"
+  camc_endpoint   = "${var.ibm_pm_service}/v1/software_deployment/chef"
+  access_token    = "${var.ibm_pm_access_token}"
   skip_ssl_verify = true
-  trace = true
+  trace           = true
+
   data = <<EOT
 {
   "os_admin_user": "${var.WASNode01-os_admin_user}",
@@ -600,18 +607,18 @@ resource "camc_softwaredeploy" "WASNode01_was_create_standalone" {
 EOT
 }
 
-
 #########################################################
 ##### Resource : WASNode01_was_v855_install
 #########################################################
 
 resource "camc_softwaredeploy" "WASNode01_was_v855_install" {
-  depends_on = ["camc_bootstrap.WASNode01_chef_bootstrap_comp"]
-  name = "WASNode01_was_v855_install"
-  camc_endpoint = "${var.ibm_pm_service}/v1/software_deployment/chef"
-  access_token = "${var.ibm_pm_access_token}"
+  depends_on      = ["camc_bootstrap.WASNode01_chef_bootstrap_comp"]
+  name            = "WASNode01_was_v855_install"
+  camc_endpoint   = "${var.ibm_pm_service}/v1/software_deployment/chef"
+  access_token    = "${var.ibm_pm_access_token}"
   skip_ssl_verify = true
-  trace = true
+  trace           = true
+
   data = <<EOT
 {
   "os_admin_user": "${var.WASNode01-os_admin_user}",
