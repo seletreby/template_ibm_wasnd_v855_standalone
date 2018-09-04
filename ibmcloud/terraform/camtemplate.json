@@ -1,7 +1,7 @@
 {
     "name": "IBM WebSphere Network Deployment V8.5.5 on a single virtual machine - IBM",
     "description": "This template deploys a standalone instance of WebSphere Application Server Network Deployment 8.5.5 on a Linux virtual machine.",
-    "version": "2.0",
+    "version": "2.1",
     "imageUrl": "",
     "image": "",
     "type": "chefcontent",
