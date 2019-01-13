@@ -262,21 +262,21 @@ variable "WASNode01_was_security_admin_user_pwd" {
 variable "WASNode01_was_version" {
   type        = "string"
   description = "The release and fixpack level of WebSphere Application Server to be installed. Example formats are 8.5.5.13 or 9.0.0.6"
-  default     = "8.5.5.13"
+  default     = "8.5.5.0"
 }
 
 #Variable : WASNode01_was_wsadmin_standalone_jvmproperty_property_value_initial
 variable "WASNode01_was_wsadmin_standalone_jvmproperty_property_value_initial" {
   type        = "string"
   description = "Minimum JVM heap size"
-  default     = "256"
+  default     = "1024"
 }
 
 #Variable : WASNode01_was_wsadmin_standalone_jvmproperty_property_value_maximum
 variable "WASNode01_was_wsadmin_standalone_jvmproperty_property_value_maximum" {
   type        = "string"
   description = "Maximum JVM heap size"
-  default     = "512"
+  default     = "1024"
 }
 
 #########################################################
