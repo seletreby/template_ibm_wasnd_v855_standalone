@@ -50,6 +50,11 @@ provider "camc" {
   version = "~> 0.2"
 }
 
+provider "ucd" {
+  username       = "${var.ucd_user}"
+  password       = "${var.ucd_password}"
+  ucd_server_url = "${var.ucd_server_url}"
+}
 
 ##############################################################
 # Reference public key in Devices>Manage>SSH Keys in SL console)
@@ -379,6 +384,7 @@ variable "ucd_user" {
 variable "ucd_password" {
   type = "string"
   description = "UCD Password."
+  default = "admin"
 }
 
 variable "ucd_server_url" {
@@ -657,17 +663,27 @@ resource "camc_softwaredeploy" "WASNode01_was_v855_install" {
   }
 }
 EOT
-}
-
 
 resource "random_id" "WASNode01_agent_id" {
   byte_length = 8
 }
 
-resource "ucd_resource_tree" "resource_tree" {
-  base_resource_group_name = "Websphere Plant"
+resource "ucd_component_mapping" "Deploy_WAS_App" {
+  component = "Deploy WAS App"
+  description = "Deploy WAS App Component"
+  parent_id = "${ucd_agent_mapping.WASNode01_agent.id}"
 }
 
+
+resource "ucd_resource_tree" "resource_tree" {
+  base_resource_group_name = "Websphere Plant_CAM"
+}
+
+resource "ucd_environment" "environment" {
+  name = "${var.environment_name}"
+  application = "Plant Application"
+  base_resource_group ="${ucd_resource_tree.resource_tree.id}"
+}
 
 resource "ucd_agent_mapping" "WASNode01_agent" {
   depends_on = [ "ibm_compute_vm_instance.WASNode01" ]
@@ -675,6 +691,18 @@ resource "ucd_agent_mapping" "WASNode01_agent" {
   agent_name = "${var.WASNode01_agent_name}.${random_id.WASNode01_agent_id.dec}"
   parent_id = "${ucd_resource_tree.resource_tree.id}"
 }
+
+resource "ucd_application_process_request" "application_process_request" {
+  depends_on = ["camc_softwaredeploy.WASNode01_was_create_standalone","ucd_component_mapping.Deploy_WAS_App"]  # depends on is merged with new components
+  application = "Plant Application"
+  application_process = "Deploy App"
+  environment = "${ucd_environment.environment.name}"
+  component_version {
+      component = "Deploy WAS App"
+      version = "latest"
+  }
+}
+
 
 output "WASNode01_ip" {
   value = "Private : ${ibm_compute_vm_instance.WASNode01.ipv4_address_private} & Public : ${ibm_compute_vm_instance.WASNode01.ipv4_address}"
