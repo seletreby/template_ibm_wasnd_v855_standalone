@@ -663,7 +663,7 @@ resource "camc_softwaredeploy" "WASNode01_was_v855_install" {
   }
 }
 EOT
-
+}
 resource "random_id" "WASNode01_agent_id" {
   byte_length = 8
 }
