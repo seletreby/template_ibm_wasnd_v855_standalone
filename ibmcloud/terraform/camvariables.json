@@ -1,20 +1,22 @@
 {
+  "output_datatype": "content_template_output",
   "input_datatypes": [
     {
       "name": "bastionhost",
       "label": "Bastion Data"
-    },            
+    },
     {
       "name": "advanced_content_runtime_chef",
       "label": "Advanced Content Runtime"
     }
   ],
-  "output_datatype": "content_template_output",
+  "input_namespaces": [ ],
+  "output_namespace": "",
   "input_groups": [
     {
       "name": "bastion",
       "label": "Bastion host variables"
-    },    
+    },
     {
       "name": "cloud",
       "label": "Cloud Input Variables"
@@ -36,270 +38,647 @@
       "label": "WASNode01"
     }
   ],
-  "output_groups": [
-    {
-      "name": "content_template_output",
-      "label": "Outputs"
-    }
-  ],
+  "output_groups": [  {
+    "name": "content_template_output",
+    "label": "Outputs"
+  } ],
   "template_input_params": [
     {
       "name": "bastion_host",
-      "type": "string",
-      "group_name": "bastion",
-      "hidden": true,
-      "description": "Bastion host for ssh proxy",
-      "default": "${bastionhost.bastion_host}",
       "label": "Bastion host",
-      "secured": false,
-      "required": false
-    },
-    {
-      "name": "bastion_port",
+      "description": "Bastion host for ssh proxy",
       "type": "string",
+      "default": "${bastionhost.bastion_host}",
+      "validation": "",
       "group_name": "bastion",
-      "hidden": true,
-      "description": "Bastion port for ssh proxy",
-      "default": "${bastionhost.bastion_port}",
-      "label": "Bastion port",
+      "required": false,
       "secured": false,
-      "required": false
+      "hidden": true,
+      "immutable": false,
+      "immutable_after_create": false
     },
     {
       "name": "bastion_user",
-      "type": "string",
-      "group_name": "bastion",
-      "hidden": true,
-      "description": "Bastion user for ssh proxy",
-      "default": "${bastionhost.bastion_user}",
       "label": "Bastion user",
+      "description": "Bastion user for ssh proxy",
+      "type": "string",
+      "default": "${bastionhost.bastion_user}",
+      "validation": "",
+      "group_name": "bastion",
+      "required": false,
       "secured": false,
-      "required": false
+      "hidden": true,
+      "immutable": false,
+      "immutable_after_create": false
     },
     {
       "name": "bastion_private_key",
-      "type": "string",
-      "group_name": "bastion",
-      "hidden": true,
-      "description": "Bastion private key for ssh proxy",
-      "default": "${bastionhost.bastion_private_key}",
       "label": "Bastion private key",
+      "description": "Bastion private key for ssh proxy",
+      "type": "string",
+      "default": "${bastionhost.bastion_private_key}",
+      "validation": "",
+      "group_name": "bastion",
+      "required": false,
       "secured": true,
-      "required": false
+      "hidden": true,
+      "immutable": false,
+      "immutable_after_create": false
     },
     {
-      "name": "bastion_password",
+      "name": "bastion_port",
+      "label": "Bastion port",
+      "description": "Bastion port for ssh proxy",
       "type": "string",
+      "default": "${bastionhost.bastion_port}",
+      "validation": "",
       "group_name": "bastion",
+      "required": false,
+      "secured": false,
       "hidden": true,
-      "description": "Bastion user password for ssh proxy",
-      "default": "${bastionhost.bastion_password}",
-      "label": "Bastion user password",
-      "secured": true,
-      "required": false
+      "immutable": false,
+      "immutable_after_create": false
     },
     {
       "name": "bastion_host_key",
-      "type": "string",
-      "group_name": "bastion",
-      "hidden": true,
-      "description": "Bastion host public key for ssh proxy",
-      "default": "${bastionhost.bastion_host_key}",
       "label": "Bastion host key",
-      "secured": false,
-      "required": false
-    },   
-    {
-      "name": "ibm_stack_id",
+      "description": "Bastion host public key for ssh proxy",
       "type": "string",
-      "description": "A unique stack id.",
-      "hidden": true,
-      "label": "A unique stack id.",
+      "default": "${bastionhost.bastion_host_key}",
+      "validation": "",
+      "group_name": "bastion",
+      "required": false,
       "secured": false,
-      "required": true,
+      "hidden": true,
       "immutable": false,
-      "group_name": "environment"
+      "immutable_after_create": false
     },
     {
-      "name": "ibm_stack_name",
+      "name": "bastion_password",
+      "label": "Bastion user password",
+      "description": "Bastion user password for ssh proxy",
       "type": "string",
-      "description": "A unique stack name.",
+      "default": "${bastionhost.bastion_password}",
+      "validation": "",
+      "group_name": "bastion",
+      "required": false,
+      "secured": true,
       "hidden": true,
-      "label": "A unique stack name.",
-      "secured": false,
-      "required": true,
       "immutable": false,
-      "group_name": "environment"
+      "immutable_after_create": false
     },
     {
-      "name": "ibm_pm_access_token",
+      "name": "base_resource_name",
+      "label": "Base Resource Name",
+      "description": "The name of the root element in the UCD resource tree",
       "type": "string",
-      "description": "IBM Pattern Manager Access Token",
-      "hidden": true,
-      "label": "IBM Pattern Manager Access Token",
-      "secured": true,
+      "default": "spb_test_1",
+      "validation": "",
+      "group_name": "",
       "required": true,
-      "immutable": true,
-      "group_name": "environment",
-      "default": "${advanced_content_runtime_chef.ibm_pm_access_token}"
-    },
-    {
-      "name": "ibm_pm_service",
-      "type": "string",
-      "description": "IBM Pattern Manager Service",
-      "hidden": true,
-      "label": "IBM Pattern Manager Service",
       "secured": false,
-      "required": true,
-      "immutable": true,
-      "group_name": "environment",
-      "default": "${advanced_content_runtime_chef.ibm_pm_service}"
-    },
-    {
-      "name": "ibm_im_repo",
-      "type": "string",
-      "description": "IBM Software  Installation Manager Repository URL (https://<hostname/IP>:<port>/IMRepo) ",
-      "hidden": true,
-      "label": "IBM Software Installation Manager Repository",
-      "secured": false,
-      "required": true,
-      "immutable": true,
-      "immutable_after_create": true,
-      "group_name": "environment",
-      "default": "${advanced_content_runtime_chef.ibm_im_repo}"
-    },
-    {
-      "name": "ibm_im_repo_password",
-      "type": "password",
-      "description": "IBM Software  Installation Manager Repository Password",
-      "hidden": true,
-      "label": "IBM Software Installation Manager Repository Password",
-      "secured": true,
-      "required": true,
-      "immutable": true,
-      "group_name": "environment",
-      "default": "${advanced_content_runtime_chef.ibm_im_repo_password}"
-    },
-    {
-      "name": "ibm_im_repo_user",
-      "type": "string",
-      "description": "IBM Software  Installation Manager Repository username",
-      "default": "${advanced_content_runtime_chef.ibm_im_repo_user}",
-      "hidden": true,
-      "label": "IBM Software Installation Manager Repository Username",
-      "secured": false,
-      "required": true,
-      "immutable": true,
-      "immutable_after_create": true,
-      "group_name": "environment"
-    },
-    {
-      "name": "ibm_sw_repo_password",
-      "type": "password",
-      "description": "IBM Software Repo Password",
-      "hidden": true,
-      "label": "IBM Software Repo Password",
-      "secured": true,
-      "required": true,
-      "immutable": true,
-      "immutable_after_create": true,
-      "group_name": "environment",
-      "default": "${advanced_content_runtime_chef.ibm_sw_repo_password}"
-    },
-    {
-      "name": "ibm_sw_repo",
-      "type": "string",
-      "description": "IBM Software Repo Root (https://<hostname>:<port>)",
-      "hidden": true,
-      "label": "IBM Software Repo Root",
-      "secured": false,
-      "required": true,
-      "immutable": true,
-      "immutable_after_create": true,
-      "group_name": "environment",
-      "default": "${advanced_content_runtime_chef.ibm_sw_repo}"
-    },
-    {
-      "name": "ibm_sw_repo_user",
-      "type": "string",
-      "description": "IBM Software Repo Username",
-      "default": "${advanced_content_runtime_chef.ibm_sw_repo_user}",
-      "hidden": true,
-      "label": "IBM Software Repo Username",
-      "secured": false,
-      "required": true,
-      "immutable": true,
-      "immutable_after_create": true,
-      "group_name": "environment"
-    },
-    {
-      "name": "WASNode01_local_disk",
-      "type": "string",
-      "description": "User local disk or SAN disk",
-      "default": "false",
       "hidden": false,
-      "label": "IBMCloud - Local / SAN Disk - WASNode01",
-      "secured": false,
-      "options": [
-        {
-          "value": "true",
-          "label": "True"
-        },
-        {
-          "value": "false",
-          "label": "False",
-          "default": "true"
-        }
-      ],
-      "required": true,
       "immutable": false,
-      "group_name": "cloud"
+      "immutable_after_create": false
     },
     {
-      "name": "ibm_pm_private_ssh_key",
+      "name": "environment_name",
+      "label": "Environment Name",
+      "description": "Environment name",
       "type": "string",
-      "description": "Private CAMC SSH key (base64 encoded) used to connect to the virtual guest.",
-      "hidden": true,
-      "label": "Private CAMC SSH key (base64 encoded) used to connect to the virtual guest. - ssh_keys",
-      "secured": true,
+      "default": "",
+      "validation": "",
+      "group_name": "",
       "required": true,
-      "immutable": true,
-      "group_name": "ssh_keys",
-      "default": "${advanced_content_runtime_chef.ibm_pm_private_ssh_key}"
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false
     },
     {
       "name": "ibm_pm_public_ssh_key_name",
-      "type": "string",
-      "description": "Public CAMC SSH key name used to connect to the virtual guest.",
-      "hidden": true,
       "label": "Public CAMC SSH key name used to connect to the virtual guest. - ssh_keys",
-      "secured": false,
-      "required": true,
-      "immutable": true,
+      "description": "Public CAMC SSH key name used to connect to the virtual guest.",
+      "type": "string",
+      "default": "${advanced_content_runtime_chef.ibm_pm_public_ssh_key_name}",
+      "validation": "",
       "group_name": "ssh_keys",
-      "default": "${advanced_content_runtime_chef.ibm_pm_public_ssh_key_name}"
+      "required": true,
+      "secured": false,
+      "hidden": true,
+      "immutable": true,
+      "immutable_after_create": false
+    },
+    {
+      "name": "ibm_pm_private_ssh_key",
+      "label": "Private CAMC SSH key (base64 encoded) used to connect to the virtual guest. - ssh_keys",
+      "description": "Private CAMC SSH key (base64 encoded) used to connect to the virtual guest.",
+      "type": "string",
+      "default": "${advanced_content_runtime_chef.ibm_pm_private_ssh_key}",
+      "validation": "",
+      "group_name": "ssh_keys",
+      "required": true,
+      "secured": true,
+      "hidden": true,
+      "immutable": true,
+      "immutable_after_create": false
     },
     {
       "name": "user_public_ssh_key",
-      "type": "string",
-      "description": "User defined public SSH key used to connect to the virtual machine. The format must be in openSSH.",
-      "default": "None",
-      "hidden": false,
       "label": "User Public SSH Key - ssh_keys",
-      "secured": false,
+      "description": "User defined public SSH key used to connect to the virtual machine. The format must be in openSSH.",
+      "type": "string",
+      "default": "None",
+      "validation": "",
+      "group_name": "ssh_keys",
       "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "ibm_stack_id",
+      "label": "A unique stack id.",
+      "description": "A unique stack id.",
+      "type": "string",
+      "default": "",
+      "validation": "",
+      "group_name": "environment",
+      "required": true,
+      "secured": false,
+      "hidden": true,
+      "immutable": false,
+      "immutable_after_create": false
+    },
+    {
+      "name": "ibm_stack_name",
+      "label": "A unique stack name.",
+      "description": "A unique stack name.",
+      "type": "string",
+      "default": "",
+      "validation": "",
+      "group_name": "environment",
+      "required": true,
+      "secured": false,
+      "hidden": true,
+      "immutable": false,
+      "immutable_after_create": false
+    },
+    {
+      "name": "ibm_im_repo",
+      "label": "IBM Software Installation Manager Repository",
+      "description": "IBM Software  Installation Manager Repository URL (https://<hostname/IP>:<port>/IMRepo) ",
+      "type": "string",
+      "default": "${advanced_content_runtime_chef.ibm_im_repo}",
+      "validation": "",
+      "group_name": "environment",
+      "required": true,
+      "secured": false,
+      "hidden": true,
+      "immutable": true,
+      "immutable_after_create": true
+    },
+    {
+      "name": "ibm_im_repo_password",
+      "label": "IBM Software Installation Manager Repository Password",
+      "description": "IBM Software  Installation Manager Repository Password",
+      "type": "password",
+      "default": "${advanced_content_runtime_chef.ibm_im_repo_password}",
+      "validation": "",
+      "group_name": "environment",
+      "required": true,
+      "secured": true,
+      "hidden": true,
+      "immutable": true,
+      "immutable_after_create": false
+    },
+    {
+      "name": "ibm_im_repo_user",
+      "label": "IBM Software Installation Manager Repository Username",
+      "description": "IBM Software  Installation Manager Repository username",
+      "type": "string",
+      "default": "${advanced_content_runtime_chef.ibm_im_repo_user}",
+      "validation": "",
+      "group_name": "environment",
+      "required": true,
+      "secured": false,
+      "hidden": true,
+      "immutable": true,
+      "immutable_after_create": true
+    },
+    {
+      "name": "ibm_pm_access_token",
+      "label": "IBM Pattern Manager Access Token",
+      "description": "IBM Pattern Manager Access Token",
+      "type": "string",
+      "default": "${advanced_content_runtime_chef.ibm_pm_access_token}",
+      "validation": "",
+      "group_name": "environment",
+      "required": true,
+      "secured": true,
+      "hidden": true,
+      "immutable": true,
+      "immutable_after_create": false
+    },
+    {
+      "name": "ibm_pm_service",
+      "label": "IBM Pattern Manager Service",
+      "description": "IBM Pattern Manager Service",
+      "type": "string",
+      "default": "${advanced_content_runtime_chef.ibm_pm_service}",
+      "validation": "",
+      "group_name": "environment",
+      "required": true,
+      "secured": false,
+      "hidden": true,
+      "immutable": true,
+      "immutable_after_create": false
+    },
+    {
+      "name": "ibm_sw_repo",
+      "label": "IBM Software Repo Root",
+      "description": "IBM Software Repo Root (https://<hostname>:<port>)",
+      "type": "string",
+      "default": "${advanced_content_runtime_chef.ibm_sw_repo}",
+      "validation": "",
+      "group_name": "environment",
+      "required": true,
+      "secured": false,
+      "hidden": true,
+      "immutable": true,
+      "immutable_after_create": true
+    },
+    {
+      "name": "ibm_sw_repo_password",
+      "label": "IBM Software Repo Password",
+      "description": "IBM Software Repo Password",
+      "type": "password",
+      "default": "${advanced_content_runtime_chef.ibm_sw_repo_password}",
+      "validation": "",
+      "group_name": "environment",
+      "required": true,
+      "secured": true,
+      "hidden": true,
+      "immutable": true,
+      "immutable_after_create": true
+    },
+    {
+      "name": "ibm_sw_repo_user",
+      "label": "IBM Software Repo Username",
+      "description": "IBM Software Repo Username",
+      "type": "string",
+      "default": "${advanced_content_runtime_chef.ibm_sw_repo_user}",
+      "validation": "",
+      "group_name": "environment",
+      "required": true,
+      "secured": false,
+      "hidden": true,
+      "immutable": true,
+      "immutable_after_create": true
+    },
+    {
+      "name": "WASNode01-mgmt-network-public",
+      "label": "Use Public Management Network",
+      "description": "Expose and use public IP of virtual machine for internal communication",
+      "type": "string",
+      "default": "true",
+      "validation": "",
+      "group_name": "virtualmachine",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false,
+      "options": [
+        {
+          "value": false,
+          "label": false
+        },
+        {
+          "value": true,
+          "label": true
+        }
+      ]
+    },
+    {
+      "name": "WASNode01-image",
+      "label": "Operating System ID / Template - WASNode01",
+      "description": "Operating system image id / template that should be used when creating the virtual image",
+      "type": "string",
+      "default": "REDHAT_7_64",
+      "validation": "",
+      "group_name": "virtualmachine",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false
+    },
+    {
+      "name": "WASNode01-name",
+      "label": "Short hostname - WASNode01",
+      "description": "Short hostname of virtual machine",
+      "type": "string",
+      "default": "",
+      "validation": "",
+      "group_name": "virtualmachine",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false
+    },
+    {
+      "name": "WASNode01-os_admin_user",
+      "label": "Operating System Username - WASNode01",
+      "description": "Name of the admin user account in the virtual machine that will be accessed via SSH",
+      "type": "string",
+      "default": "",
+      "validation": "",
+      "group_name": "virtualmachine",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false
+    },
+    {
+      "name": "WASNode01_was_install_dir",
+      "label": "WebSphere product installation directory - WASNode01",
+      "description": "The installation root directory for the WebSphere Application Server product binaries",
+      "type": "string",
+      "default": "/opt/IBM/WebSphere/AppServer",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "WASNode01_was_java_version",
+      "label": "WebSphere Java SDK version - WASNode01",
+      "description": "The Java SDK version that should be installed with the WebSphere Application Server. Example format is 8.0.4.70",
+      "type": "string",
+      "default": "7.1.4.15",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "WASNode01_was_os_users_was_comment",
+      "label": "WebSphere user comment for user - WASNode01",
+      "description": "Comment that will be added when creating the userid",
+      "type": "string",
+      "default": "WAS administrative user",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": false,
+      "hidden": true,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "WASNode01_was_os_users_was_gid",
+      "label": "WebSphere user group name - WASNode01",
+      "description": "Operating system group name that will be assigned to the product installation",
+      "type": "string",
+      "default": "wasgrp",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "WASNode01_was_os_users_was_home",
+      "label": "WebSphere installation userid home directory - WASNode01",
+      "description": "Home directory location for operating system user that is used for product installation",
+      "type": "string",
+      "default": "/home/wasadmin",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": false,
+      "hidden": true,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "WASNode01_was_os_users_was_ldap_user",
+      "label": "WebSphere to use LDAP for authentication - WASNode01",
+      "description": "A flag which indicates whether to create the WebSphere user locally, or utilize an LDAP based user",
+      "type": "string",
+      "default": "false",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": false,
+      "hidden": true,
       "immutable": false,
       "immutable_after_create": true,
-      "group_name": "ssh_keys"
+      "options": [
+        {
+          "value": "true",
+          "label": "true"
+        },
+        {
+          "value": "false",
+          "label": "false",
+          "default": true
+        }
+      ]
+    },
+    {
+      "name": "WASNode01_was_os_users_was_name",
+      "label": "WebSphere installation userid - WASNode01",
+      "description": "Operating system userid that will be used to install the product. Userid will be created if it does not exist",
+      "type": "string",
+      "default": "wasadmin",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "WASNode01_was_profile_dir",
+      "label": "WebSphere profile location - WASNode01",
+      "description": "The directory path that contains WebSphere Application Server profiles",
+      "type": "string",
+      "default": "/opt/IBM/WebSphere/AppServer/profiles",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "WASNode01_was_profiles_standalone_profiles_standalone1_cell",
+      "label": "WebSphere Application Server cell name - WASNode01",
+      "description": "Cell name for the application server",
+      "type": "string",
+      "default": "cell01",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "WASNode01_was_profiles_standalone_profiles_standalone1_keystorepassword",
+      "label": "WebSphere default keystore password - WASNode01",
+      "description": "Specifies the password to use on all keystore files created during profile creation",
+      "type": "password",
+      "default": "",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": true,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "WASNode01_was_profiles_standalone_profiles_standalone1_profile",
+      "label": "WebSphere Application Server profile name - WASNode01",
+      "description": "Application server profile name",
+      "type": "string",
+      "default": "AppSrv01",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "WASNode01_was_profiles_standalone_profiles_standalone1_server",
+      "label": "WebSphere Application Server name - WASNode01",
+      "description": "Name of the application server",
+      "type": "string",
+      "default": "server1",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": false,
+      "hidden": true,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "WASNode01_was_security_admin_user",
+      "label": "WebSphere administrative user name - WASNode01",
+      "description": "The username for securing the WebSphere adminstrative console",
+      "type": "string",
+      "default": "wasadmin",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "WASNode01_was_security_admin_user_pwd",
+      "label": "WebSphere administrative user password - WASNode01",
+      "description": "The password for the WebSphere administrative account",
+      "type": "password",
+      "default": "",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": true,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "WASNode01_was_version",
+      "label": "WebSphere Application Server Version - WASNode01",
+      "description": "The release and fixpack level of WebSphere Application Server to be installed. Example formats are 8.5.5.13 or 9.0.0.6",
+      "type": "string",
+      "default": "8.5.5.13",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "WASNode01_was_wsadmin_standalone_jvmproperty_property_value_initial",
+      "label": "WebSphere Application Server minimum JVM Heap Size - WASNode01",
+      "description": "Minimum JVM heap size",
+      "type": "string",
+      "default": "256",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "WASNode01_was_wsadmin_standalone_jvmproperty_property_value_maximum",
+      "label": "WebSphere Application Server maximum JVM Heap Size - WASNode01",
+      "description": "Maximum JVM heap size",
+      "type": "string",
+      "default": "512",
+      "validation": "",
+      "group_name": "wasnode01",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": true
+    },
+    {
+      "name": "runtime_domain",
+      "label": "Virtual machine Domain Name",
+      "description": "Virtual Machine Domain Name",
+      "type": "string",
+      "default": "cam.ibm.com",
+      "validation": "",
+      "group_name": "virtualmachine",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false
     },
     {
       "name": "WASNode01_datacenter",
-      "type": "string",
-      "description": "IBMCloud datacenter where infrastructure resources will be deployed",
-      "default": "dal09",
-      "hidden": false,
       "label": "IBMCloud Datacenter - WASNode01",
+      "description": "IBMCloud datacenter where infrastructure resources will be deployed",
+      "type": "string",
+      "default": "dal09",
+      "validation": "",
+      "group_name": "cloud",
+      "required": true,
       "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false,
       "options": [
         {
           "value": "ams01",
@@ -426,88 +805,21 @@
           "value": "wdc04",
           "label": "Washington, D.C. 04, USA"
         }
-      ],
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
-    },
-    {
-      "name": "WASNode01_dedicated_acct_host_only",
-      "type": "string",
-      "description": "Shared or dedicated host, where dedicated host usually means higher performance and cost",
-      "default": "false",
-      "hidden": false,
-      "label": "IBMCloud Dedicate Account Host - WASNode01",
-      "secured": false,
-      "options": [
-        {
-          "value": "true",
-          "label": "True"
-        },
-        {
-          "value": "false",
-          "label": "False",
-          "default": "true"
-        }
-      ],
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
-    },
-    {
-      "name": "WASNode01_hourly_billing",
-      "type": "string",
-      "description": "Billing cycle: hourly billed or monthly billed",
-      "default": "true",
-      "hidden": false,
-      "label": "IBMCloud Hourly Billing - WASNode01",
-      "secured": false,
-      "options": [
-        {
-          "value": "true",
-          "label": "True",
-          "default": "true"
-        },
-        {
-          "value": "false",
-          "label": "False"
-        }
-      ],
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
-    },
-    {
-      "name": "WASNode01_network_speed",
-      "type": "string",
-      "description": "Bandwidth of network communication applied to the virtual machine",
-      "default": 1000,
-      "hidden": false,
-      "label": "IBMCloud Network Speed - WASNode01",
-      "secured": false,
-      "options": [
-        {
-          "value": 100,
-          "label": "100"
-        },
-        {
-          "value": 1000,
-          "label": "1000",
-          "default": "true"
-        }
-      ],
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
+      ]
     },
     {
       "name": "WASNode01_private_network_only",
-      "type": "string",
-      "description": "Provision the virtual machine with only private IP",
-      "default": "false",
-      "hidden": false,
       "label": "IBMCloud Private Network - WASNode01",
+      "description": "Provision the virtual machine with only private IP",
+      "type": "string",
+      "default": "false",
+      "validation": "",
+      "group_name": "cloud",
+      "required": true,
       "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false,
       "options": [
         {
           "value": "true",
@@ -518,19 +830,48 @@
           "label": "False",
           "default": "true"
         }
-      ],
+      ]
+    },
+    {
+      "name": "WASNode01_number_of_cores",
+      "label": "IBMCloud VSI Number of Cores - WASNode01",
+      "description": "Number of CPU cores, which is required to be a positive Integer",
+      "type": "string",
+      "default": 2,
+      "validation": "",
+      "group_name": "cloud",
       "required": true,
+      "secured": false,
+      "hidden": false,
       "immutable": false,
-      "group_name": "cloud"
+      "immutable_after_create": false,
+      "options": [
+        { "value": 1, "label": "1" },
+        {
+          "value": 2,
+          "label": "2",
+          "default": "true"
+        },
+        { "value": 4, "label": "4" },
+        { "value": 8, "label": "8" },
+        { "value": 12, "label": "12" },
+        { "value": 16, "label": "16" },
+        { "value": 32, "label": "32" }
+      ]
     },
     {
       "name": "WASNode01_memory",
-      "type": "string",
-      "description": "Amount of Memory (MBs), which is required to be one or more times of 1024",
-      "default": 4096,
-      "hidden": false,
       "label": "IBMCloud VSI Memory - WASNode01",
+      "description": "Amount of Memory (MBs), which is required to be one or more times of 1024",
+      "type": "string",
+      "default": 4096,
+      "validation": "",
+      "group_name": "cloud",
+      "required": true,
       "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false,
       "options": [
         {
           "value": 1024,
@@ -561,85 +902,121 @@
           "value": 32768,
           "label": "32768"
         }
-      ],
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
+      ]
     },
     {
-      "name": "WASNode01_number_of_cores",
+      "name": "WASNode01_network_speed",
+      "label": "IBMCloud Network Speed - WASNode01",
+      "description": "Bandwidth of network communication applied to the virtual machine",
       "type": "string",
-      "description": "Number of CPU cores, which is required to be a positive Integer",
-      "default": 2,
-      "hidden": false,
-      "label": "IBMCloud VSI Number of Cores - WASNode01",
+      "default": 1000,
+      "validation": "",
+      "group_name": "cloud",
+      "required": true,
       "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false,
       "options": [
         {
-          "value": 1,
-          "label": "1"
+          "value": 100,
+          "label": "100"
         },
         {
-          "value": 2,
-          "label": "2",
+          "value": 1000,
+          "label": "1000",
+          "default": "true"
+        }
+      ]
+    },
+    {
+      "name": "WASNode01_hourly_billing",
+      "label": "IBMCloud Hourly Billing - WASNode01",
+      "description": "Billing cycle: hourly billed or monthly billed",
+      "type": "string",
+      "default": "true",
+      "validation": "",
+      "group_name": "cloud",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false,
+      "options": [
+        {
+          "value": "true",
+          "label": "True",
           "default": "true"
         },
         {
-          "value": 4,
-          "label": "4"
-        },
-        {
-          "value": 8,
-          "label": "8"
-        },
-        {
-          "value": 12,
-          "label": "12"
-        },
-        {
-          "value": 16,
-          "label": "16"
-        },
-        {
-          "value": 32,
-          "label": "32"
+          "value": "false",
+          "label": "False"
         }
-      ],
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
+      ]
     },
     {
-      "name": "WASNode01-image",
+      "name": "WASNode01_dedicated_acct_host_only",
+      "label": "IBMCloud Dedicate Account Host - WASNode01",
+      "description": "Shared or dedicated host, where dedicated host usually means higher performance and cost",
       "type": "string",
-      "description": "Operating system image id / template that should be used when creating the virtual image",
-      "default": "REDHAT_7_64",
-      "hidden": false,
-      "label": "Operating System ID / Template - WASNode01",
-      "secured": false,
+      "default": "false",
+      "validation": "",
+      "group_name": "cloud",
       "required": true,
+      "secured": false,
+      "hidden": false,
       "immutable": false,
-      "group_name": "virtualmachine"
+      "immutable_after_create": false,
+      "options": [
+        {
+          "value": "true",
+          "label": "True"
+        },
+        {
+          "value": "false",
+          "label": "False",
+          "default": "true"
+        }
+      ]
     },
     {
-      "name": "WASNode01-os_admin_user",
+      "name": "WASNode01_local_disk",
+      "label": "IBMCloud - Local / SAN Disk - WASNode01",
+      "description": "User local disk or SAN disk",
       "type": "string",
-      "description": "Name of the admin user account in the virtual machine that will be accessed via SSH",
-      "hidden": false,
-      "label": "Operating System Username - WASNode01",
-      "secured": false,
+      "default": "false",
+      "validation": "",
+      "group_name": "cloud",
       "required": true,
+      "secured": false,
+      "hidden": false,
       "immutable": false,
-      "group_name": "virtualmachine"
+      "immutable_after_create": false,
+      "options": [
+        {
+          "value": "true",
+          "label": "True"
+        },
+        {
+          "value": "false",
+          "label": "False",
+          "default": "true"
+        }
+      ]
     },
     {
       "name": "WASNode01_root_disk_size",
-      "type": "string",
-      "description": "Root Disk Size - WASNode01",
-      "default": "100",
-      "hidden": false,
       "label": "Root Disk Size - WASNode01",
+      "description": "Root Disk Size - WASNode01",
+      "type": "string",
+      "default": "100",
+      "validation": "",
+      "group_name": "cloud",
+      "required": true,
       "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false,
       "options": [
         {
           "value": "25",
@@ -650,284 +1027,63 @@
           "label": "100 GB",
           "default": true
         }
-      ],
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
+      ]
     },
     {
-      "name": "WASNode01-name",
+      "name": "ucd_user",
+      "label": "Ucd User",
+      "description": "UCD User.",
       "type": "string",
-      "description": "Short hostname of virtual machine",
+      "default": "admin",
+      "validation": "",
+      "group_name": "",
+      "required": true,
+      "secured": false,
       "hidden": false,
-      "label": "Short hostname - WASNode01",
-      "secured": false,
-      "required": true,
       "immutable": false,
-      "group_name": "virtualmachine"
+      "immutable_after_create": false
     },
     {
-      "name": "runtime_domain",
+      "name": "ucd_password",
+      "label": "Ucd Password",
+      "description": "UCD Password.",
       "type": "string",
-      "description": "Virtual Machine Domain Name",
+      "default": "",
+      "validation": "",
+      "group_name": "",
+      "required": true,
+      "secured": false,
       "hidden": false,
-      "label": "Virtual machine Domain Name",
-      "secured": false,
-      "required": true,
       "immutable": false,
-      "group_name": "virtualmachine"
+      "immutable_after_create": false
     },
     {
-      "name": "WASNode01-mgmt-network-public",
+      "name": "ucd_server_url",
+      "label": "Ucd Server Url",
+      "description": "UCD Server URL.",
       "type": "string",
-      "description": "Expose and use public IP of virtual machine for internal communication",
-      "default": "true",
+      "default": "http://161.156.69.189:8080",
+      "validation": "",
+      "group_name": "",
+      "required": true,
+      "secured": false,
       "hidden": false,
-      "label": "Use Public Management Network",
-      "secured": false,
-      "options": [
-        {
-          "value": false,
-          "label": false
-        },
-        {
-          "value": true,
-          "label": true
-        }
-      ],
-      "required": true,
       "immutable": false,
-      "group_name": "virtualmachine"
+      "immutable_after_create": false
     },
     {
-      "name": "WASNode01_was_version",
+      "name": "WASNode01_agent_name",
+      "label": "Wasnode 01 Agent Name",
+      "description": "Agent name",
       "type": "string",
-      "description": "The release and fixpack level of WebSphere Application Server to be installed. Example formats are 8.5.5.13 or 9.0.0.6",
-      "default": "8.5.5.13",
+      "default": "",
+      "validation": "",
+      "group_name": "",
+      "required": true,
+      "secured": false,
       "hidden": false,
-      "label": "WebSphere Application Server Version - WASNode01",
-      "secured": false,
-      "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_profiles_standalone_profiles_standalone1_cell",
-      "type": "string",
-      "description": "Cell name for the application server",
-      "default": "cell01",
-      "hidden": false,
-      "label": "WebSphere Application Server cell name - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_wsadmin_standalone_jvmproperty_property_value_maximum",
-      "type": "string",
-      "description": "Maximum JVM heap size",
-      "default": "512",
-      "hidden": false,
-      "label": "WebSphere Application Server maximum JVM Heap Size - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_wsadmin_standalone_jvmproperty_property_value_initial",
-      "type": "string",
-      "description": "Minimum JVM heap size",
-      "default": "256",
-      "hidden": false,
-      "label": "WebSphere Application Server minimum JVM Heap Size - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_profiles_standalone_profiles_standalone1_server",
-      "type": "string",
-      "description": "Name of the application server",
-      "default": "server1",
-      "hidden": true,
-      "label": "WebSphere Application Server name - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_profiles_standalone_profiles_standalone1_profile",
-      "type": "string",
-      "description": "Application server profile name",
-      "default": "AppSrv01",
-      "hidden": false,
-      "label": "WebSphere Application Server profile name - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_java_version",
-      "type": "string",
-      "description": "The Java SDK version that should be installed with the WebSphere Application Server. Example format is 8.0.4.70",
-      "default": "7.1.4.15",
-      "hidden": false,
-      "label": "WebSphere Java SDK version - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_security_admin_user",
-      "type": "string",
-      "description": "The username for securing the WebSphere adminstrative console",
-      "default": "wasadmin",
-      "hidden": false,
-      "label": "WebSphere administrative user name - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_security_admin_user_pwd",
-      "type": "password",
-      "description": "The password for the WebSphere administrative account",
-      "hidden": false,
-      "label": "WebSphere administrative user password - WASNode01",
-      "secured": true,
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_profiles_standalone_profiles_standalone1_keystorepassword",
-      "type": "password",
-      "description": "Specifies the password to use on all keystore files created during profile creation",
-      "hidden": false,
-      "label": "WebSphere default keystore password - WASNode01",
-      "secured": true,
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_os_users_was_name",
-      "type": "string",
-      "description": "Operating system userid that will be used to install the product. Userid will be created if it does not exist",
-      "default": "wasadmin",
-      "hidden": false,
-      "label": "WebSphere installation userid - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_os_users_was_home",
-      "type": "string",
-      "description": "Home directory location for operating system user that is used for product installation",
-      "default": "/home/wasadmin",
-      "hidden": true,
-      "label": "WebSphere installation userid home directory - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_install_dir",
-      "type": "string",
-      "description": "The installation root directory for the WebSphere Application Server product binaries",
-      "default": "/opt/IBM/WebSphere/AppServer",
-      "hidden": false,
-      "label": "WebSphere product installation directory - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_profile_dir",
-      "type": "string",
-      "description": "The directory path that contains WebSphere Application Server profiles",
-      "default": "/opt/IBM/WebSphere/AppServer/profiles",
-      "hidden": false,
-      "label": "WebSphere profile location - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_os_users_was_ldap_user",
-      "type": "string",
-      "description": "A flag which indicates whether to create the WebSphere user locally, or utilize an LDAP based user",
-      "default": "false",
-      "hidden": true,
-      "label": "WebSphere to use LDAP for authentication - WASNode01",
-      "secured": false,
-      "options": [
-        {
-          "value": "true",
-          "label": "true"
-        },
-        {
-          "value": "false",
-          "label": "false",
-          "default": true
-        }
-      ],
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_os_users_was_comment",
-      "type": "string",
-      "description": "Comment that will be added when creating the userid",
-      "default": "WAS administrative user",
-      "hidden": true,
-      "label": "WebSphere user comment for user - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
-    },
-    {
-      "name": "WASNode01_was_os_users_was_gid",
-      "type": "string",
-      "description": "Operating system group name that will be assigned to the product installation",
-      "default": "wasgrp",
-      "hidden": false,
-      "label": "WebSphere user group name - WASNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "wasnode01"
+      "immutable_after_create": false
     }
   ],
   "template_output_params": [
@@ -935,37 +1091,41 @@
       "name": "WASNode01_ip",
       "label": "IP Addresss",
       "description": "The Public and Public IP address",
-      "type": "string",
-      "hidden": false,
+      "group_name": "content_template_output",
       "secured": false,
-      "group_name": "content_template_output"
+      "hidden": false,
+      "shortname": "",
+      "type": "string"
     },
     {
       "name": "WASNode01_name",
       "label": "Node Name",
       "description": "The chef node name",
-      "type": "string",
-      "hidden": false,
+      "group_name": "content_template_output",
       "secured": false,
-      "group_name": "content_template_output"
+      "hidden": false,
+      "shortname": "",
+      "type": "string"
     },
     {
       "name": "WASNode01_roles",
       "label": "Chef Roles",
       "description": "The chef roles deployed",
-      "type": "string",
-      "hidden": false,
+      "group_name": "content_template_output",
       "secured": false,
-      "group_name": "content_template_output"
+      "hidden": false,
+      "shortname": "",
+      "type": "string"
     },
     {
       "name": "stack_id",
       "label": "Generated Stack ID",
       "description": "The generated stack id",
-      "type": "string",
-      "hidden": false,
+      "group_name": "content_template_output",
       "secured": false,
-      "group_name": "content_template_output"
+      "hidden": false,
+      "shortname": "",
+      "type": "string"
     }
   ]
 }
