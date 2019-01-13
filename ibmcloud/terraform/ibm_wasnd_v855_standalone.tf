@@ -399,6 +399,11 @@ variable "WASNode01_agent_name" {
   description = "Agent name"
 }
 
+variable "environment_name" {
+ type = "string"
+ description = "Environment name"
+}
+
 resource "ibm_compute_vm_instance" "WASNode01" {
   hostname = "${var.WASNode01-name}"
   os_reference_code = "${var.WASNode01-image}"
