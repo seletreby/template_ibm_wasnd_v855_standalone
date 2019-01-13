@@ -50,6 +50,7 @@ provider "camc" {
   version = "~> 0.2"
 }
 
+
 ##############################################################
 # Reference public key in Devices>Manage>SSH Keys in SL console)
 ##############################################################
@@ -369,6 +370,29 @@ variable "WASNode01_root_disk_size" {
   default = "100"
 }
 
+variable "ucd_user" {
+  type = "string"
+  description = "UCD User."
+  default = "admin"
+}
+
+variable "ucd_password" {
+  type = "string"
+  description = "UCD Password."
+}
+
+variable "ucd_server_url" {
+  type = "string"
+  description = "UCD Server URL."
+  default = "http://161.156.69.189:8080"
+}
+
+
+variable "WASNode01_agent_name" {
+  type = "string"
+  description = "Agent name"
+}
+
 resource "ibm_compute_vm_instance" "WASNode01" {
   hostname = "${var.WASNode01-name}"
   os_reference_code = "${var.WASNode01-image}"
@@ -456,6 +480,19 @@ EOF
       "bash -c './WASNode01_add_ssh_key.sh  \"${var.WASNode01-os_admin_user}\" \"${var.user_public_ssh_key}\">> WASNode01_add_ssh_key.log 2>&1'"
     ]
   }
+  
+  provisioner "ucd" {
+    agent_name      = "${var.WASNode01_agent_name}.${random_id.WASNode01_agent_id.dec}"
+    ucd_server_url  = "${var.ucd_server_url}"
+    ucd_user        = "${var.ucd_user}"
+    ucd_password    = "${var.ucd_password}"
+  }
+  provisioner "local-exec" {
+    when = "destroy"
+    command = <<EOT
+    curl -k -u ${var.ucd_user}:${var.ucd_password} ${var.ucd_server_url}/cli/agentCLI?agent=${var.WASNode01_agent_name}.${random_id.WASNode01_agent_id.dec} -X DELETE
+EOT
+}
 
 }
 
@@ -620,6 +657,23 @@ resource "camc_softwaredeploy" "WASNode01_was_v855_install" {
   }
 }
 EOT
+}
+
+
+resource "random_id" "WASNode01_agent_id" {
+  byte_length = 8
+}
+
+resource "ucd_resource_tree" "resource_tree" {
+  base_resource_group_name = "Websphere Plant"
+}
+
+
+resource "ucd_agent_mapping" "WASNode01_agent" {
+  depends_on = [ "ibm_compute_vm_instance.WASNode01" ]
+  description = "Agent to manage the WASNode01 server"
+  agent_name = "${var.WASNode01_agent_name}.${random_id.WASNode01_agent_id.dec}"
+  parent_id = "${ucd_resource_tree.resource_tree.id}"
 }
 
 output "WASNode01_ip" {
