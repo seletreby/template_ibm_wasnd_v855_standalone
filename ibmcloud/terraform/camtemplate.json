@@ -23,7 +23,7 @@
       }
     },
     "metadata": {
-      "displayName": "IBM WebSphere Network Deployment V8.5.5 on a single virtual machine",
+      "displayName": "IBM WebSphere Network Deployment V8.5.5 on a single virtual machine with Urban Code agent",
       "providerDisplayName": "IBM",
       "longDescription": "This template deploys a standalone instance of WebSphere Application Server Network Deployment 8.5.5 on a Linux virtual machine.",
       "bullets": [{
