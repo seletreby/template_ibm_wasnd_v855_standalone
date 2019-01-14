@@ -713,7 +713,13 @@ output "WASNode01_ip" {
   value = "Private : ${ibm_compute_vm_instance.WASNode01.ipv4_address_private} & Public : ${ibm_compute_vm_instance.WASNode01.ipv4_address}"
 }
 
-output "WASNode01_name" {
+output " Web Server Admin Console" {
+   value = "http://${ibm_compute_vm_instance.WASNode01.ipv4_address}:9443/admin"
+
+  output " Planet Application" {
+   value = "http://${ibm_compute_vm_instance.WASNode01.ipv4_address}:9080/PlantsByWebSphere"
+
+  output "WASNode01_name" {
   value = "${var.WASNode01-name}"
 }
 
